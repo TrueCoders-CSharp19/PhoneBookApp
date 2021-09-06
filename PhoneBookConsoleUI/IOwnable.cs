@@ -6,7 +6,7 @@ namespace PhoneBookConsoleUI
 {
 
 
-    interface IHaveAnOwner
+    interface IOwnable
     {
         public string OwnerFirstName { get; set; }
         public string OwnerLastName { get; set; }

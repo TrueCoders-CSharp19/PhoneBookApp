@@ -6,8 +6,6 @@ namespace PhoneBookConsoleUI
     {
         static void Main(string[] args)
         {
-            GetGameType();
-
 
 
         }
@@ -60,11 +58,10 @@ namespace PhoneBookConsoleUI
             Classes to start with for baseline structure:
 
             •  Account 
-                Has a name for account holder
-                has a primary contact
+
                 
             • Contact
-                contact Name
+
                 
 
         
@@ -125,34 +122,6 @@ namespace PhoneBookConsoleUI
         */
 
         #endregion
-
-        static void GetGameType()
-        {
-            string[] message = new string[]
-            {
-                "What type of game would you like to play?", "",
-            };
-            string[] options = new string[]
-            {
-                "Black Jack     ",
-                "End Application",
-            };
-            string[] inputRequestMessage = new string[]
-            {
-                "","Selection: "
-            };
-            int option = InputHandler.OptionList(message, options, inputRequestMessage);
-            switch (option)
-            {
-                case 1:
-                    ConsoleController.PrintToScreen("You selected 1.", true);
-                    break;
-                case 2:
-                    ConsoleController.PrintToScreen("You selected 2.", false);
-                    break;
-            }
-            ConsoleController.Clear(true);
-        }
 
 
     }

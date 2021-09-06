@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PhoneBookConsoleUI
 {
-    /*Account
+    /*Contact
 
         Feature Owner: Daniel Aguirre
 
@@ -16,12 +16,15 @@ namespace PhoneBookConsoleUI
 
     */
 
-    class Contact : IHaveAnOwner
+    /// <summary>
+    /// Contact represents a phone number, Owner (firstName and lastName) and a ParentAccount that it is tied to.
+    /// </summary>
+    class Contact : IOwnable
     {
         public string OwnerFirstName { get; set; }
         public string OwnerLastName { get; set; }
         public string PhoneNumber { get; set; }
-
+        public Account ParentAccount { get; set; }
 
         public Contact(string firstName, string lastName, string phoneNumber)
         {
