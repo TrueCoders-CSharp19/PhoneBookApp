@@ -5,6 +5,7 @@ using System.Text;
 namespace PhoneBookConsoleUI
 {
 
+    //TODO: Ask joey if he thinks we should tie Owners to Contacts at this level?
 
     interface IOwnable
     {
@@ -12,5 +13,6 @@ namespace PhoneBookConsoleUI
         public string OwnerLastName { get; set; }
         public string LastNameFirstName { get { return OwnerLastName + ", " + OwnerFirstName; } }
 
+        public void TransferOwnership();
     }
 }
