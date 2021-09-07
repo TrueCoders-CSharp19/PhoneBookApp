@@ -1,8 +1,8 @@
 ﻿<Properties StartupConfiguration="{2C9E1AA3-695B-465C-A320-DB9EEB860248}|Default">
   <MonoDevelop.Ide.Workbench ActiveDocument="PhoneBookConsoleUI/Logger.cs">
     <Files>
-      <File FileName="PhoneBookConsoleUI/Program.cs" Line="1" Column="1" />
-      <File FileName="PhoneBookConsoleUI/Logger.cs" Line="1" Column="1" />
+      <File FileName="PhoneBookConsoleUI/Program.cs" Line="10" Column="21" />
+      <File FileName="PhoneBookConsoleUI/Logger.cs" Line="66" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
