@@ -14,6 +14,5 @@ namespace PhoneBookConsoleUI
         public string LastNameFirstName { get { return OwnerLastName + ", " + OwnerFirstName; } }
 
         public void TransferOwnership();
-
     }
 }
