@@ -7,6 +7,12 @@ namespace PhoneBookConsoleUI
     public static class InputHandler
     {
 
+        //TODO:
+        //
+        //      Create more Input Methods that can work with less params needed.
+        //      May need to reduce logic to allow these to just be helper methods for other
+        //      classes that are needing the input.
+
         /// <summary>
         /// Print the first array provided above the options. Then print the options to display. Then print the input request message with the last line using Write() instead of WriteLine()
         /// </summary>

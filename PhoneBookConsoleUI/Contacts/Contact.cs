@@ -33,7 +33,10 @@ namespace PhoneBookConsoleUI
             PhoneNumber = phoneNumber;
         }
 
-
-
+        //TODO: TransferOwnership may refer to either changing the OwnerFirst/LastName and/or the ParentAccount?
+        public void TransferOwnership()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

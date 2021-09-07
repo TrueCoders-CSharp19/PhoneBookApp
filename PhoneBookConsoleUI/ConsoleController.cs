@@ -7,8 +7,12 @@ namespace PhoneBookConsoleUI
     public static class ConsoleController
     {
 
+        //TODO: Switch out ConsoleController to reduce params needed for printing text.
 
         public enum TextAlignment { Default, Horizontal, VerticalHorizontal }
+
+        #region PrintToScreen(string)
+
 
         /// <summary>
         /// Print the provided string to the console. If dontEndLine then will use Console.Write, else will WriteLine()
@@ -65,6 +69,10 @@ namespace PhoneBookConsoleUI
                 Clear(true);
             }
         }
+
+        #endregion
+
+        #region PrintToScreen(string[])
 
         /// <summary>
         /// Print an array of messages to the console, each on their own line.
@@ -155,8 +163,9 @@ namespace PhoneBookConsoleUI
             }
         }
 
+        #endregion
 
-        #region SkipLines
+        #region SkipLines()
 
         /// <summary>
         /// Skip lines to center the current line vertically.
@@ -195,7 +204,7 @@ namespace PhoneBookConsoleUI
 
         #endregion
 
-        #region Clear Console
+        #region Clear()
 
         /// <summary>
         /// If true, wait for user to press a key then clear. Else just clear.
