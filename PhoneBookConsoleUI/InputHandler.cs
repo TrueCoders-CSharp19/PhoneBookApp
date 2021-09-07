@@ -37,7 +37,7 @@ namespace PhoneBookConsoleUI
             // clear the console
             ConsoleController.Clear(false);
             // print the wholeMessage to the screen
-            ConsoleController.PrintToScreen(wholeMessage, true);
+            ConsoleController.PrintHorizontal(wholeMessage, true);
             // if can parse into an int
             char charInput = Console.ReadKey().KeyChar;
             if (int.TryParse(charInput.ToString(), out input))
@@ -62,7 +62,7 @@ namespace PhoneBookConsoleUI
         static void InvalidInputMessage(int charLimit)
         {
             var limit = charLimit;
-            ConsoleController.PrintToScreen(new string[]
+            ConsoleController.PrintVerticalHorizontal(new string[]
             {
                 "I'm sorry, but I cannot accept your entry.", "",
                 $"Your entry must be greater than 0 and less than {charLimit}", "",
@@ -78,7 +78,7 @@ namespace PhoneBookConsoleUI
         {
             var input = ConvertEnterChar(inputReceived);
 
-            ConsoleController.PrintToScreen(new string[] {
+            ConsoleController.PrintVerticalHorizontal(new string[] {
                 $"I'm sorry, {input} is not a valid option.", "",
                 "Press any key to return. "
             }, true, true);
