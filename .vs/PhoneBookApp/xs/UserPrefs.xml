@@ -1,15 +1,10 @@
 ﻿<Properties StartupConfiguration="{2C9E1AA3-695B-465C-A320-DB9EEB860248}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="PhoneBookConsoleUI/Contacts/Contact.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="PhoneBookConsoleUI/Logger.cs">
     <Files>
       <File FileName="PhoneBookConsoleUI/Program.cs" Line="10" Column="1" />
-      <File FileName="PhoneBookConsoleUI/Logger.cs" Line="66" Column="1" />
-      <File FileName="PhoneBookConsoleUI/IOwnable.cs" Line="1" Column="1" />
-      <File FileName="PhoneBookConsoleUI/InputHandler.cs" Line="14" Column="52" />
-      <File FileName="PhoneBookConsoleUI/Accounts/AccountList.cs" Line="1" Column="1" />
-      <File FileName="PhoneBookConsoleUI/Accounts/Account.cs" Line="1" Column="1" />
-      <File FileName="PhoneBookConsoleUI/ConsoleController.cs" Line="234" Column="19" />
-      <File FileName="PhoneBookConsoleUI/Contacts/ContactList.cs" Line="1" Column="1" />
-      <File FileName="PhoneBookConsoleUI/Contacts/Contact.cs" Line="1" Column="1" />
+      <File FileName="PhoneBookConsoleUI/Contacts/ContactFactory.cs" Line="6" Column="9" />
+      <File FileName="PhoneBookConsoleUI/Contacts/Contact.cs" Line="47" Column="23" />
+      <File FileName="PhoneBookConsoleUI/Logger.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -17,9 +12,8 @@
           <Node name="PhoneBookApp" expanded="True">
             <Node name="PhoneBookConsoleUI" expanded="True">
               <Node name="Accounts" expanded="True" />
-              <Node name="Contacts" expanded="True">
-                <Node name="Contact.cs" selected="True" />
-              </Node>
+              <Node name="Contacts" expanded="True" />
+              <Node name="Logger.cs" selected="True" />
             </Node>
           </Node>
         </State>
