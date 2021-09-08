@@ -54,7 +54,7 @@ namespace PhoneBookConsoleUI.Contacts
         }
 
         // Loads all of the formatted contact data into a string array that can
-        // be returned to the parent account for storage in their contact list.
+        // be returned to the contact list for the parent account.
         internal static string[] LoadContactCard()
         {
             string[] contactCard = { EnterFirstName(), EnterLastName(), EnterPhoneNumber() };
