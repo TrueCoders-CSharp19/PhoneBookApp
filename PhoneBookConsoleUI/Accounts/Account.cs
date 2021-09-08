@@ -11,31 +11,33 @@
                             ability to make changes to the properties of this class.
     */
 
-    internal abstract class Account : IOwnable
+    public abstract class Account : IOwnable
     {
         /// <summary>
         /// Primary Contact - AccountOwner - will be used to search for accounts by the Contact.PhoneNumber, or Contact.LastNameFirstName
         /// </summary>
-        Contact AccountOwner { get; set; }
+        public Contact AccountOwner { get; set; }
+        public string[] ContactDetails { get { return UpdatedContactDetails(); } private set { ContactDetails = value; } }
         public string OwnerFirstName { get; set; }
         public string OwnerLastName { get; set; }
+        public string LastNameFirstName { get { return OwnerLastName + ", " + OwnerFirstName; } }
         public string PrimaryNumber { get; set; }
 
-
-        /// <summary>
-        /// List of Contacts that are registered to this account.
-        /// </summary>
-        ContactList AccountContacts { get; set; }
+        public string[] UpdatedContactDetails()
+        {
+            return new string[] { OwnerFirstName, OwnerLastName, LastNameFirstName, PrimaryNumber };
+        }
 
         /// <summary>
         /// Account Constructor requires a Contact that will be stored as the accountOwner.
         /// </summary>
         /// <param name="accountOwner"></param>
-        Account(Contact accountOwner)
+        public Account(Contact accountOwner)
         {
             AccountOwner = accountOwner;
             OwnerFirstName = AccountOwner.OwnerFirstName;
             OwnerLastName = AccountOwner.OwnerLastName;
+            ContactDetails = UpdatedContactDetails();
         }
 
         /// <summary>
@@ -47,11 +49,6 @@
         /// Remove a contact from the account.
         /// </summary>
         public abstract void RemoveContact();
-
-        /// <summary>
-        /// View the Contacts listed this accounts AccountContacts ContactList.
-        /// </summary>
-        public abstract void ViewAccountContacts();
 
         /// <summary>
         /// Transfer ownership to new Contact. Requirements may vary based on Account type that inherits from Account.

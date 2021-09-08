@@ -21,10 +21,11 @@ namespace PhoneBookConsoleUI
     /// <summary>
     /// Contact represents a phone number, Owner (firstName and lastName) and a ParentAccount that it is tied to.
     /// </summary>
-    abstract class Contact : IOwnable
+    public abstract class Contact : IOwnable
     {
         public string OwnerFirstName { get; set; }
         public string OwnerLastName { get; set; }
+        public string LastNameFirstName { get { return OwnerLastName + ", " + OwnerFirstName; } }
         public string PhoneNumber { get; set; }
         public Account ParentAccount { get; set; }
 
@@ -47,7 +48,7 @@ namespace PhoneBookConsoleUI
         /// </summary>
         public abstract void DeleteContact();
 
-        //TODO: TransferOwnership() - OwnerFirstName and OwnerLastName changed.
+        
         public abstract void TransferOwnership();
     }
 }
