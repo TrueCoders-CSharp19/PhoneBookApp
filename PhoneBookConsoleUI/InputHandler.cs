@@ -7,8 +7,7 @@ namespace PhoneBookConsoleUI
     public static class InputHandler
     {
 
-        //TODO:
-        //
+        //TODO: Refactor Input Handler
         //      Create more Input Methods that can work with less params needed.
         //      May need to reduce logic to allow these to just be helper methods for other
         //      classes that are needing the input.
