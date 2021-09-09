@@ -8,6 +8,12 @@ namespace PhoneBookConsoleUI.Contacts
     // account phonebook list.
     public static class ContactFactory
     {
+
+        //TODO:     Since you have a method for EnterFirstName, EnterLastName, EnterPhoneNumber, and LoadContactCard,
+        //          could we break these down into an abstract factory class, and then I will implement the same methods
+        //          in the Account Factory class... This may allow our menu option for updating these properties at a later time
+        //          be able to handle both Contacts and Accounts because they both inherit from Factory?
+
         // Prompt the user to enter the last name of the contact they wish to
         // add and return a string of their response with the first character
         // capitalized.
