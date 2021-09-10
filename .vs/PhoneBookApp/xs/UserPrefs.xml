@@ -1,9 +1,9 @@
 ﻿<Properties StartupConfiguration="{2C9E1AA3-695B-465C-A320-DB9EEB860248}|Default">
   <MonoDevelop.Ide.Workbench ActiveDocument="PhoneBookConsoleUI/Contacts/Contact.cs">
     <Files>
-      <File FileName="PhoneBookConsoleUI/Contacts/ContactFactory.cs" Line="57" Column="66" />
+      <File FileName="PhoneBookConsoleUI/Contacts/ContactFactory.cs" Line="63" Column="66" />
       <File FileName="PhoneBookConsoleUI/Accounts/Account.cs" />
-      <File FileName="PhoneBookConsoleUI/Contacts/Contact.cs" Line="52" Column="6" />
+      <File FileName="PhoneBookConsoleUI/Contacts/Contact.cs" Line="53" Column="6" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">

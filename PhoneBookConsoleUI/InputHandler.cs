@@ -7,51 +7,53 @@ namespace PhoneBookConsoleUI
     public static class InputHandler
     {
 
-        //TODO:
-        //
-        //      Create more Input Methods that can work with less params needed.
-        //      May need to reduce logic to allow these to just be helper methods for other
-        //      classes that are needing the input.
+        /// <summary>
+        /// Return true or false based on if Console.ReadLine matches string[] options. If true, out will provide the index that has the first match. Else will out null. If bool contains is true, then will check based on contains instead of exact matches.
+        /// </summary>
+        /// <param name="options"></param>
+        /// <param name="optionIndex"></param>
+        /// <returns></returns>
+        public static bool ValidateInput(string[] options, out int? optionIndex, bool contains)
+        {
+            if (contains)
+            {
+                var input = Console.ReadLine();
+                for (int i = 0; i < options.Length; i++)
+                {
+                    if (options[i].ToLower().Contains(input.ToLower()))
+                    {
+                        optionIndex = i;
+                        return true;
+                    }
+                }
+                optionIndex = null;
+                return false;
+            }
+            else return ValidateInput(options, out optionIndex);
+        }
 
         /// <summary>
-        /// Print the first array provided above the options. Then print the options to display. Then print the input request message with the last line using Write() instead of WriteLine()
+        /// Return true or false based on if Console.ReadLine matches string[] options. If true, out will provide the index that has the first match. Else will out null.
         /// </summary>
-        /// <param name="everythingAboveOptions"></param>
-        /// <param name="optionsToDisplay"></param>
-        /// <param name="inputRequestMessage"></param>
+        /// <param name="options"></param>
+        /// <param name="optionIndex"></param>
         /// <returns></returns>
-        public static int OptionList(string[] everythingAboveOptions, string[] optionsToDisplay, string[] inputRequestMessage)
+        public static bool ValidateInput(string[] options, out int? optionIndex)
         {
-            int input;
-            // create a string[] that is large enough to hold all strings together
-            var wholeMessage = new string[everythingAboveOptions.Length + optionsToDisplay.Length + inputRequestMessage.Length];
-            // place everything above the options into the wholeMessage
-            everythingAboveOptions.CopyTo(wholeMessage, 0);
-            // add each option to wholeMessage with "#) " added in front of it.
-            for (int optionNumber = 0; optionNumber < optionsToDisplay.Length; optionNumber++)
+            var input = Console.ReadLine();
+            for (int i = 0; i < options.Length ; i++)
             {
-                wholeMessage[everythingAboveOptions.Length + optionNumber] = $"{optionNumber + 1}) {optionsToDisplay[optionNumber]}";
-            }
-            // Add the input request message to the end of the whole message.
-            inputRequestMessage.CopyTo(wholeMessage, wholeMessage.Length - inputRequestMessage.Length);
-            // clear the console
-            ConsoleController.Clear(false);
-            // print the wholeMessage to the screen
-            ConsoleController.PrintHorizontal(wholeMessage, true);
-            // if can parse into an int
-            char charInput = Console.ReadKey().KeyChar;
-            if (int.TryParse(charInput.ToString(), out input))
-            {
-                if (input != 0 && input <= optionsToDisplay.Length)
+                if(options[i].ToLower() == input.ToLower())
                 {
-                    ConsoleController.Clear(false);
-                    return input;
+                    optionIndex = i;
+                    return true;
                 }
             }
-            ConsoleController.Clear(false);
-            InvalidInputMessage(charInput);
-            return OptionList(everythingAboveOptions, optionsToDisplay, inputRequestMessage);
+            optionIndex = null;
+            return false;
+
         }
+
 
         #region Invalid Input Messages
 
