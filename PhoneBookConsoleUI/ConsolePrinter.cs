@@ -10,16 +10,36 @@ namespace PhoneBookConsoleUI
 
         public static Dictionary<string, string[]> MenuMessages = new Dictionary<string, string[]>
         {
-            {"FirstMessage", new string[] {
-                "Welcome to our Phone Book Application", "", 
+            {"Greeting", new string[] {
+                "Welcome to our Phone Book Application", "",
                 "Created by Joey Stilley and Daniel Aguirre", "",
-                "Press any key to continue."} },
-            
-            {"SecondMessage", new string[] {
+                "Press any key to continue." } 
+            },
+
+            {"MainMenu", new string[] {
                 "Please select what you would like to do next: ", "",
                 "1) Show all contacts  ",
                 "2) Access my account  ",
-                "3) End the application"} }
+                "3) End the application" } 
+            },
+
+            {"EndApplication", new string[] {
+                "Thank you for taking the time to use our Phone Book Application.", "",
+                "Created by Joey Stilley and Daniel Aguirre", "",
+                "Press any key to finish ending the application."
+            } },
+
+            {"ReturnForInvalidEntry", new string[] {
+                    "I'm sorry, the entry you provided is not a valid selection.", "",
+                    "Press any key to return to the previous screen."  }
+            },
+
+            { "ContentNotCreated", new string[] {
+                    "I'm sorry, this content is not yet created.", "",
+                    "Please try this selection again in a later version.", "",
+                    "Press any key to return to the previous screen." }
+            }
+
         };
 
         /// <summary>
@@ -37,12 +57,12 @@ namespace PhoneBookConsoleUI
         /// Take in a string key and write a message corresponding to that key in the dictionary 
         /// </summary>
         /// <param name="key"></param>
-        public void PrintCentered(string key)
+        public void PrintCentered(Dictionary<string, string[]> dictionaryToSearch, string key)
         {
             CheckRowCount();
-            var messages = MenuMessages[key].Select(x => PadToCenter(x)).ToArray();
+            var messages = dictionaryToSearch[key].Select(x => PadToCenter(x)).ToArray();
             var startIndex = (Console.WindowHeight / 2) - (messages.Length / 2);
-            UpdateRows(ref StringRows, startIndex, messages);
+            UpdateRows(startIndex, messages);
             PrintAll(StringRows);
         }
 
@@ -52,9 +72,10 @@ namespace PhoneBookConsoleUI
         /// <param name="stringRows"></param>
         void PrintAll(List<StringBuilder> stringRows)
         {
-            foreach (var row in StringRows)
+            Console.Clear();
+            foreach (var item in stringRows)
             {
-                Console.WriteLine(row);
+                Console.WriteLine(item);
             }
         }
 
@@ -64,7 +85,7 @@ namespace PhoneBookConsoleUI
         /// <param name="rows"></param>
         /// <param name="startIndex"></param>
         /// <param name="messages"></param>
-        void UpdateRows(ref List<StringBuilder> rows, int startIndex, string[] messages)
+        void UpdateRows(int startIndex, string[] messages)
         {
             ClearAllStrings();
             for (int i = 0; i < messages.Length; i++)
