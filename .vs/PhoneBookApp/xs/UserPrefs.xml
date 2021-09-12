@@ -1,21 +1,22 @@
 ﻿<Properties StartupConfiguration="{2C9E1AA3-695B-465C-A320-DB9EEB860248}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="PhoneBookConsoleUI/ConsolePrinter.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="PhoneBookConsoleUI/obj/Debug/netcoreapp3.1/PhoneBookConsoleUI.csproj.CoreCompileInputs.cache">
     <Files>
-      <File FileName="PhoneBookConsoleUI/Accounts/PersonalAccount.cs" Line="20" Column="1" />
+      <File FileName="PhoneBookConsoleUI/Accounts/PersonalAccount.cs" Line="193" Column="2" />
       <File FileName="PhoneBookConsoleUI/Accounts/AccountFactory.cs" Line="1" Column="1" />
       <File FileName="PhoneBookConsoleUI/Contacts/Contact.cs" Line="1" Column="1" />
       <File FileName="PhoneBookConsoleUI/Contacts/ContactFactory.cs" Line="45" Column="91" />
       <File FileName="PhoneBookConsoleUI/Program.cs" Line="15" Column="31" />
-      <File FileName="PhoneBookConsoleUI/ConsolePrinter.cs" Line="1" Column="1" />
+      <File FileName="PhoneBookConsoleUI/ConsolePrinter.cs" Line="51" Column="36" />
+      <File FileName=".vs/PhoneBookApp/xs/UserPrefs.xml" Line="3" Column="12" />
+      <File FileName="PhoneBookConsoleUI/obj/Debug/netcoreapp3.1/PhoneBookConsoleUI.csproj.CoreCompileInputs.cache" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="PhoneBookApp" expanded="True">
+          <Node name="PhoneBookApp" expanded="True" selected="True">
             <Node name="PhoneBookConsoleUI" expanded="True">
               <Node name="Accounts" expanded="True" />
               <Node name="Contacts" expanded="True" />
-              <Node name="ConsolePrinter.cs" selected="True" />
             </Node>
           </Node>
         </State>
