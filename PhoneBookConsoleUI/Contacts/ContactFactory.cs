@@ -19,9 +19,9 @@ namespace PhoneBookConsoleUI.Contacts
         // capitalized.
         internal static string EnterFirstName()
         {
-            Console.WriteLine("Please enter the first name of the contact you would like to add.");
+            Console.WriteLine($"\nPlease enter the first name for your contact.");
             var userInput = Console.ReadLine();
-            var firstName = $"First Name: {char.ToUpper(userInput[0])}{userInput.Substring(1)}";
+            var firstName = $"{char.ToUpper(userInput[0])}{userInput.Substring(1)}";
             return firstName;
         }
 
@@ -30,9 +30,9 @@ namespace PhoneBookConsoleUI.Contacts
         // capitalized.
         internal static string EnterLastName()
         {
-            Console.WriteLine($"\nPlease enter the last name of the contact you would like to add.");
+            Console.WriteLine($"\nPlease enter the last name for your contact.");
             var userInput = Console.ReadLine();
-            var lastName = $"Last Name: {char.ToUpper(userInput[0])}{userInput.Substring(1)}";
+            var lastName = $"{char.ToUpper(userInput[0])}{userInput.Substring(1)}";
             return lastName;
         }
 
@@ -42,7 +42,7 @@ namespace PhoneBookConsoleUI.Contacts
         // 10 digits long.
         internal static string EnterPhoneNumber()
         {
-            Console.WriteLine($"\nPlease enter the 10 digit phone number of the contact you would like to add.");
+            Console.WriteLine($"\nPlease enter the 10 digit phone number for your contact.");
             var unformatted = Regex.Replace(Console.ReadLine(), "[^.0-9]", "");
             if(unformatted.Length == 10)
             {
@@ -57,14 +57,6 @@ namespace PhoneBookConsoleUI.Contacts
                 Console.WriteLine($"\nThe number you entered was not 10 digits long.");
                 return EnterPhoneNumber();
             }
-        }
-
-        // Loads all of the formatted contact data into a string array that can
-        // be returned to the contact list for the parent account.
-        internal static string[] LoadContactCard()
-        {
-            string[] contactCard = { EnterFirstName(), EnterLastName(), EnterPhoneNumber() };
-            return contactCard;
         }
     }
 }
