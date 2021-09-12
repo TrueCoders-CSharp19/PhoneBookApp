@@ -16,7 +16,7 @@ namespace PhoneBookConsoleUI.Accounts
             var consoleStrings = new ConsolePrinter();   
         }
 
-        // Adds a new contact to the account holder's list of contacts
+        // 1. Adds a new contact to the account holder's list of contacts
         public void AddContact()
         {
             var adding = true;
@@ -31,7 +31,7 @@ namespace PhoneBookConsoleUI.Accounts
             }
         }
 
-        // Removes a specific contact from an acount holder's list of contacts
+        // 1. Removes a specific contact from an acount holder's list of contacts
         public void RemoveContact()
         {
             var removing = true;
@@ -112,7 +112,7 @@ namespace PhoneBookConsoleUI.Accounts
         // 2. Returns a list of contacts matching the search parameter.
         public List<Contact> SearchContacts()
         {
-            List<Contact> searchResults = new List<Contact>();
+            var searchResults = new List<Contact>();
 
             Console.WriteLine("Please enter the number for the type of search you would like to make:");
             Console.WriteLine($"1. By first name\n2. By Last name\n3. By full name\n By phone number");
@@ -122,53 +122,28 @@ namespace PhoneBookConsoleUI.Accounts
                 case "1":
                     Console.WriteLine("Please enter the first name of the contact you are searching for.");
                     var searchVariable = Console.ReadLine().ToLower();
-                    foreach(var savedContact in Contacts)
-                    {
-                        if(searchVariable == savedContact.FirstName.ToLower())
-                        {
-                            searchResults.Add(savedContact);
-                        }
-                    }
+                    searchResults = Contacts.Where(contact => contact.FirstName.ToLower() == searchVariable.ToLower()).ToList();
                     return searchResults;
                 case "2":
                     Console.WriteLine("Please enter the last name of the contact you are searching for.");
                     searchVariable = Console.ReadLine().ToLower();
-                    foreach (var savedContact in Contacts)
-                    {
-                        if (searchVariable == savedContact.LastName)
-                        {
-                            searchResults.Add(savedContact);
-                        }
-                    }
+                    searchResults = Contacts.Where(contact => contact.LastName.ToLower() == searchVariable.ToLower()).ToList();
                     return searchResults;
 
                 case "3":
-                    Console.WriteLine("Please enter the phone number of the contact you are searching for.");
+                    Console.WriteLine("Please enter the first and last name of the contact you are searching for.");
                     searchVariable = Console.ReadLine().ToLower();
-                    foreach (var savedContact in Contacts)
-                    {
-                        if (searchVariable == savedContact.FullName.ToLower())
-                        {
-                            searchResults.Add(savedContact);
-                        }
-                    }
+                    searchResults = Contacts.Where(contact => contact.FullName.ToLower() == searchVariable.ToLower()).ToList();
                     return searchResults;
 
                 case "4":
                     Console.WriteLine("Please enter the phone number of the contact you are searching for.");
                     searchVariable = Regex.Replace(Console.ReadLine(), "[^.0-9]", "");
-                    foreach (var savedContact in Contacts)
-                    {
-                        if (searchVariable == Regex.Replace(savedContact.PhoneNumber, "[^.0-9]", ""))
-                        {
-                            searchResults.Add(savedContact);
-                        }
-                    }
+                    searchResults = Contacts.Where(contact => Regex.Replace(contact.PhoneNumber, "[^.0-9]", "") == searchVariable).ToList();
                     return searchResults;
             }
             return searchResults;
         }
-
 
         // 1. Prints out a numbered list of the search results
         // 2. If there are no results, tells the user there were no results
