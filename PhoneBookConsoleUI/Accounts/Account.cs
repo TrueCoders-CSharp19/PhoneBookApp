@@ -35,16 +35,16 @@
         public Account(Contact accountOwner)
         {
             AccountOwner = accountOwner;
-            OwnerFirstName = AccountOwner.OwnerFirstName;
-            OwnerLastName = AccountOwner.OwnerLastName;
+            OwnerFirstName = AccountOwner.FirstName;
+            OwnerLastName = AccountOwner.LastName;
             ContactDetails = UpdatedContactDetails();
         }
 
         /// <summary>
         /// Add a contact to the account.
         /// </summary>
-        public abstract void AddContact();
- 
+        public abstract void AddContact(Contact contact);
+
         /// <summary>
         /// Remove a contact from the account.
         /// </summary>

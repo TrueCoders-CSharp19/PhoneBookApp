@@ -11,15 +11,44 @@ namespace PhoneBookConsoleUI
         public static Dictionary<string, string[]> MenuMessages = new Dictionary<string, string[]>
         {
             {"FirstMessage", new string[] {
-                "Welcome to our Phone Book Application", "", 
+                "Welcome to our Phone Book Application", "",
                 "Created by Joey Stilley and Daniel Aguirre", "",
                 "Press any key to continue."} },
-            
+
             {"SecondMessage", new string[] {
                 "Please select what you would like to do next: ", "",
                 "1) Show all contacts  ",
                 "2) Access my account  ",
-                "3) End the application"} }
+                "3) End the application"} },
+
+            {"EndApplication", new string[] {
+                "Thank you for taking the time to use our Phone Book Application.", "",
+                "Created by Joey Stilley and Daniel Aguirre", "",
+                "Press any key to finish ending the application."} },
+
+            {"ReturnForInvalidEntry", new string[] {
+                    "I'm sorry, the entry you provided is not a valid selection.", "",
+                    "Press any key to return to the previous screen."  } },
+
+            { "ContentNotCreated", new string[] {
+                    "I'm sorry, this content is not yet created.", "",
+                    "Please try this selection again in a later version.", "",
+                    "Press any key to return to the previous screen." } },
+
+            {"FirstNamePrompt", new string[] {
+                "Please enter the first name of the contact you would like to add."} },
+
+            {"LastNamePrompt", new string[] {
+                "Please enter the last name of the contact you would like to add."} },
+
+            {"PhoneNumberPrompt", new string[] {
+                "Please enter the 10 digit phone number of the contact you would like to add."} },
+
+            {"ConfirmPrompt", new string[] {
+                "Please confirm the following Contact Card is correct",
+                "First Name: ",
+                "Last Name: ",
+                "Phone Number: "} }
         };
 
         /// <summary>
