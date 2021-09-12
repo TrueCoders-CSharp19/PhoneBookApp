@@ -28,13 +28,13 @@ namespace PhoneBookConsoleUI
         static void MainMenu()
         {
 
-            ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages, "SecondMessage", "Selection: ");
+            ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages["SecondMessage"], "Selection: ");
             var input = Console.ReadKey().KeyChar;
             switch (input)
             {
                 case '1':
                     //TODO: Show all contacts.
-                    ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages, "ContentNotCreated");
+                    ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages["ContentNotCreated"]);
                     Console.ReadKey();
                     break;
                 case '2':
@@ -48,14 +48,14 @@ namespace PhoneBookConsoleUI
                     Account.RemoveContact();
                     break;
                 case '5':
-                    ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages, "EndApplication");
+                    ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages["EndApplication"]);
                     Console.ReadKey();
                     Console.Clear();
                     ApplicationRunning = false;
                     break;
                 // if no match then will display no valid entry and then the loop in RunApplication() will return the user to the main menu screen.
                 default:
-                    ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages, "ReturnForInvalidEntry");
+                    ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages["ReturnForInvalidEntry"]);
                     Console.ReadKey();
                     Console.Clear();
                     break;
@@ -66,7 +66,7 @@ namespace PhoneBookConsoleUI
         public static void GreetUser()
         {
 
-            ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages, "FirstMessage");
+            ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages["FirstMessage"]);
             Console.ReadKey();
 
         }

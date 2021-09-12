@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Linq;
 
 namespace PhoneBookConsoleUI
@@ -102,25 +103,199 @@ namespace PhoneBookConsoleUI
         /// <summary>
         /// List of StringBuilders so that I can remove them or add them as needed based on console size.
         /// </summary>
-        static List<StringBuilder> StringRows;
+        static List<StringBuilder> ScreenRows;
 
         static ConsolePrinter ()
         {
-            StringRows = new List<StringBuilder>() { new StringBuilder(Console.WindowWidth) };
+            ScreenRows = new List<StringBuilder>() { new StringBuilder(Console.WindowWidth) };
             AddMinimumRowsNeeded();
         }
 
+
+        #region Input Messages
+
+
+        /// <summary>
+        /// Clear the screen then Cycle through the newMessage until the user confirms their input. baseMessage reflects all strings above where the user types. inputRequestMessage reflects the text that appears directly in front of where the user types their response.
+        /// </summary>
+        /// <param name="newMessage"></param>
+        /// <param name="inputRequestMessage"></param>
+        /// <returns></returns>
+        public static string NewStringRequestMessage(string[] newMessage, string inputRequestMessage)
+        {
+            
+            bool inputconfirmed = false;
+            bool removeExtraMessage = false;
+            string input = string.Empty;
+            while (!inputconfirmed)
+            {
+                NewMessage(newMessage, inputRequestMessage);
+                input = Console.ReadLine();
+                if (input == ConsoleKey.Enter.ToString())
+                {
+                    input = "Enter";
+                }
+                AddToScreen($"Your entered: {input}.", "Is this correct? ");
+                // if users input does not start  with y, is correct, or is true (with a couple typos allowed)
+                if (!new Regex(@"(^y+|corr?ect|true?)").IsMatch(Console.ReadLine().ToLower()))
+                {
+                    //TODO: test the countToRemove with using a string[] base message instead of just a string message.
+                    // if it doesn't work properly, then logic for countToRemove should be changed to be dependant
+                    // on the baseMessage.Length ..... Pretty sure this will need to be implemented.
+                    // change the number of rows to remove based on if we have already looped before, to remove the message printed next.
+                    int countToRemove = removeExtraMessage ? 6 : 4;
+                    RemoveLastRows(countToRemove);
+                    AddToScreen("Alright then, lets try this again...");
+                    removeExtraMessage = true;
+                }
+                else
+                {
+                    inputconfirmed = true;
+                }
+            }
+            return input;
+        }
+
+
+        /// <summary>
+        /// Cycle through a message that is displayed below the current screen until the user confirms their input. baseMessage reflects all strings above where the user types. inputRequestMessage reflects the text that appears directly in front of where the user types their response.
+        /// </summary>
+        /// <param name="newMessage"></param>
+        /// <param name="inputRequestMessage"></param>
+        /// <returns></returns>
+        public static string StackedStringRequestMessage(string[] newMessage, string inputRequestMessage)
+        {
+            bool inputconfirmed = false;
+            bool removeExtraMessage = false;
+            string input = string.Empty;
+            while (!inputconfirmed)
+            {
+                AddToScreen(newMessage, inputRequestMessage);
+                input = Console.ReadLine();
+                if (input == ConsoleKey.Enter.ToString())
+                {
+                    input = "Enter";
+                }
+                AddToScreen($"Your entered: {input}.", "Is this correct? ");
+                // if users input does not start  with y, is correct, or is true (with a couple typos allowed)
+                if (!new Regex(@"(^y+|corr?ect|true?)").IsMatch(Console.ReadLine().ToLower()))
+                {
+                    //TODO: test the countToRemove with using a string[] base message instead of just a string message.
+                    // if it doesn't work properly, then logic for countToRemove should be changed to be dependant
+                    // on the baseMessage.Length ..... Pretty sure this will need to be implemented.
+                    // change the number of rows to remove based on if we have already looped before, to remove the message printed next.
+                    int countToRemove = removeExtraMessage ? 6 : 4;
+                    RemoveLastRows(countToRemove);
+                    AddToScreen("Alright then, lets try this again...");
+                    removeExtraMessage = true;
+                }
+                else
+                {
+                    inputconfirmed = true;
+                }
+            }
+            return input;
+        }
+
+        /// <summary>
+        /// Cycle through a message that is displayed below the current screen until the user confirms their input. baseMessage reflects all strings above where the user types. inputRequestMessage reflects the text that appears directly in front of where the user types their response.
+        /// </summary>
+        /// <param name="newMessage"></param>
+        /// <param name="inputRequestMessage"></param>
+        /// <returns></returns>
+        public static string StackedStringRequestMessage(string newMessage, string inputRequestMessage)
+        {
+            bool inputconfirmed = false;
+            bool removeExtraMessage = false;
+            string input = string.Empty;
+            while (!inputconfirmed)
+            {
+                AddToScreen(newMessage, inputRequestMessage);
+                input = Console.ReadLine();
+                if (input == ConsoleKey.Enter.ToString())
+                {
+                    input = "Enter";
+                }
+                AddToScreen($"Your entered: {input}", "Is this correct? ");
+                // if users input does not start  with y, is correct, or is true (with a couple typos allowed)
+                if (!new Regex(@"(^y+|corr?ect|true?)").IsMatch(Console.ReadLine().ToLower()))
+                {
+                    // change the number of rows to remove based on if we have already looped before, to remove the message printed next.
+                    int countToRemove = removeExtraMessage ? 6 : 4;
+                    RemoveLastRows(countToRemove);
+                    AddToScreen("Alright then, lets try this again...");
+                    removeExtraMessage = true;
+                }
+                else
+                {
+                    inputconfirmed = true;
+                }
+            }
+            return input;
+        }
+
+        /// <summary>
+        /// Print the message provided on a loop until the player provides a valid input option. Numbers available is dependant on how many messages match @"[\d]+)"
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        public static int NewOptionListMessage(string[] message)
+        {
+            int maxNumber = message.Where(x => new Regex(@"^[\d]+\)").IsMatch(x)).Count();
+            char input = ' ';
+            bool firstLoop = true;
+            int result = 0;
+            do
+            {
+                // print screen
+                NewMessage(message);
+                // if not the first loop, display invalid entry message.
+                if (!firstLoop)
+                {
+                    // TODO: ternary
+                    string invalid = input.ToString();
+                    if (input == (char)ConsoleKey.Enter)
+                    {
+                        invalid = "Enter";
+                    }
+                    AddToScreen($"I'm sorry, {invalid} is not a valid entry.");
+                }
+                // get single char input from user
+                input = Console.ReadKey().KeyChar;
+                // if input is a one char digit
+                if (new Regex(@"^[\d]$").IsMatch(input.ToString()))
+                {
+                    // then parse the input
+                    result = int.Parse(input.ToString());
+                    // if result is less than zero and is greater than option count then
+                    // set result to zero so that we can go back through loop.
+                    if (result < 0 | result > maxNumber)
+                    {
+                        result = 0;
+                    }
+                }
+                if (result == 0)
+                {
+                    firstLoop = false;
+                }
+            } while (result == 0);
+
+            return result;
+        }
+
+        #endregion
+
+        #region Standard Messages
 
         /// <summary>
         /// Take in a Dictionary to search, and a key, then print a message centered vertically corresponding to that key.
         /// </summary>
         /// <param name="key"></param>
-        public static void NewMessage(Dictionary<string, string[]> dictionaryToSearch, string key)
+        public static void NewMessage(string[] newMessage)
         {
             AddMinimumRowsNeeded();
-            var messages = dictionaryToSearch[key].Select(x => PadToCenter(x)).ToArray();
-            var startIndex = (Console.WindowHeight / 2) - (messages.Length / 2);
-            UpdateRows(startIndex, messages);
+            var startIndex = (Console.WindowHeight / 2) - (newMessage.Length / 2);
+            UpdateRows(startIndex, newMessage.Select(x => PadToCenter(x)).ToArray()); ;
             PrintAll();
         }
 
@@ -128,10 +303,10 @@ namespace PhoneBookConsoleUI
         /// Take in a Dictionary to search, and a key, then print a message followed by the inputRequestMessage centered vertically corresponding to that key. 
         /// </summary>
         /// <param name="key"></param>
-        public static void NewMessage(Dictionary<string, string[]> dictionaryToSearch, string key, string inputRequestMessage)
+        public static void NewMessage(string[] newMessage, string inputRequestMessage)
         {
             AddMinimumRowsNeeded();
-            var messages = dictionaryToSearch[key].Select(x => PadToCenter(x)).ToArray();
+            var messages = newMessage.Select(x => PadToCenter(x)).ToArray();
             var startIndex = (Console.WindowHeight / 2) - (messages.Length / 2);
             UpdateRows(startIndex, messages);
             PrintAll(inputRequestMessage);
@@ -176,32 +351,37 @@ namespace PhoneBookConsoleUI
         {
             // add an empty new row to list of StringRows for spacing
             AddToStringRows("");
-            foreach (var message in newMessages)
-            {
-                // add the passed message to the list
-                AddToStringRows(message);
-            }
+            AddToStringRows(newMessages);
             PrintAll(inputRequestMessage);
         }
 
+
+        #endregion
+
+        #region Internal Methods for Printing Screen.
+
+        /// <summary>
+        /// Clears console and then prints all ScreenRows to the console. the provided inputRequestMessage will be printed below the last newMessage line, with a space between the two.
+        /// </summary>
+        /// <param name="inputRequesetMessage"></param>
         static void PrintAll(string inputRequesetMessage)
         {
 
             Console.Clear();
-            for (int i = 0; i < StringRows.Count; i++)
+            for (int i = 0; i < ScreenRows.Count; i++)
             {
                 // if it's the last cycle of string rows.
-                if (i == StringRows.Count - 1)
+                if (i == ScreenRows.Count - 1)
                 {
                     // print last row and add two new lines for spacing
-                    Console.WriteLine(StringRows[i] + "\n");
+                    Console.WriteLine(ScreenRows[i] + "\n");
                     // then print "Selection: " before where the user types their input
                     Console.Write(inputRequesetMessage.PadLeft(Console.WindowWidth / 2));
                 }
                 else
                 {
                     // otherwise if it's not the last row being printed then just keep printing rows
-                    Console.WriteLine(StringRows[i]);
+                    Console.WriteLine(ScreenRows[i]);
                 }
                 Console.CursorVisible = true;
             }
@@ -215,7 +395,7 @@ namespace PhoneBookConsoleUI
         {
 
             Console.Clear();
-            foreach (var message in StringRows)
+            foreach (var message in ScreenRows)
             {
                 Console.WriteLine(message);
             }
@@ -231,18 +411,18 @@ namespace PhoneBookConsoleUI
         static void UpdateRows(int startIndex, string[] messages)
         {
             // reset the StringRows list by clearing it then adding the minimum number of rows needed.
-            StringRows.Clear();
+            ScreenRows.Clear();
             AddMinimumRowsNeeded();
             // start adding more rows with messages for however many messages being passed.
             for (int i = 0; i < messages.Length; i++)
             {
                 try
                 {
-                    StringRows[i + startIndex].Insert(0, messages[i]);
+                    ScreenRows[i + startIndex].Insert(0, messages[i]);
                 }
                 catch (ArgumentOutOfRangeException)
                 {
-                    StringRows.Add(new StringBuilder(messages[i]));
+                    ScreenRows.Add(new StringBuilder(messages[i]));
                 }
             }
         }
@@ -252,9 +432,9 @@ namespace PhoneBookConsoleUI
         /// </summary>
         static void AddMinimumRowsNeeded()
         {
-            while (StringRows.Count < Console.WindowHeight/2)
+            while (ScreenRows.Count < Console.WindowHeight / 2)
             {
-                StringRows.Add(new StringBuilder(Console.WindowWidth));
+                ScreenRows.Add(new StringBuilder(Console.WindowWidth));
             }
         }
 
@@ -272,13 +452,20 @@ namespace PhoneBookConsoleUI
             return textToCenter.PadLeft((int)MathF.Round((Console.WindowWidth / 2) + (textToCenter.Length / 2)));
         }
 
-
+        /// <summary>
+        /// Remove a screen row from the top of the console, and then add the provided message to the bottom. This is used to stack a new message below an existing message.
+        /// </summary>
+        /// <param name="message"></param>
         static void AddToStringRows(string message)
         {
-            StringRows.RemoveAt(0);
-            StringRows.Add(new StringBuilder(PadToCenter(message)));
+            ScreenRows.RemoveAt(0);
+            ScreenRows.Add(new StringBuilder(PadToCenter(message)));
         }
 
+        /// <summary>
+        /// Remove a screen row (for each string) from the top of the console, and then add the string[] message to the bottom. This is used to stack new messages below an existing message.
+        /// </summary>
+        /// <param name="message"></param>
         static void AddToStringRows(string[] message)
         {
             foreach (var item in message)
@@ -286,6 +473,18 @@ namespace PhoneBookConsoleUI
                 AddToStringRows(item);
             }
         }
+
+        /// <summary>
+        /// Remove x many rows from bottom of the screen (most recent messages) based on countToRemove provided. Rows are inserted at the top of the screen to make up for those being removed.
+        /// </summary>
+        /// <param name="countToRemove"></param>
+        static void RemoveLastRows(int countToRemove)
+        {
+            ScreenRows.RemoveRange(ScreenRows.Count - countToRemove, countToRemove);
+            ScreenRows.InsertRange(0, new StringBuilder[countToRemove]);
+        }
+
+        #endregion
 
     }
 }

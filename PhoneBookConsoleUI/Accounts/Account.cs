@@ -38,7 +38,7 @@ namespace PhoneBookConsoleUI.Accounts
             {
                 var contact = ContactFactory.CreateContact();
                 Contacts.Add(contact);
-                ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages, "AddAnother", "yes / no: ");
+                ConsolePrinter.AddToScreen(ConsolePrinter.MenuMessages["AddAnother"], "yes / no: ");
                 var userResponse = Console.ReadLine().ToLower();
                 if (userResponse != "yes")
                 {
@@ -62,7 +62,7 @@ namespace PhoneBookConsoleUI.Accounts
             while (editing)
             {
                 ConsolePrinter.AddToScreen($"First Name: {editIt.FirstName}\n Last Name: {editIt.LastName}\nPhone Number: {editIt.FirstName}");
-                ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages, "Edit", "Selection: ");
+                ConsolePrinter.AddToScreen(ConsolePrinter.MenuMessages["Edit"], "Selection: ");
                 var field = Console.ReadKey().KeyChar;
                 switch (field)
                 {
@@ -78,12 +78,12 @@ namespace PhoneBookConsoleUI.Accounts
                         editIt.FirstName = ContactFactory.EnterPhoneNumber();
                         break;
                     default:
-                        ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages, "ReturnForInvalidEntry");
+                        ConsolePrinter.AddToScreen(ConsolePrinter.MenuMessages["ReturnForInvalidEntry"].ToString());
                         Console.ReadKey();
                         EditContact();
                         break;
                 }
-                ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages, "StillEditing", "yes/no: ");
+                ConsolePrinter.AddToScreen(ConsolePrinter.MenuMessages["StillEditing"], "yes/no: ");
                 var userInput = Console.ReadLine().ToLower();
                 if (userInput != "yes")
                 {
@@ -91,7 +91,7 @@ namespace PhoneBookConsoleUI.Accounts
                 }
             }
 
-            ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages, "EditAnother", "yes/no: ");
+            ConsolePrinter.AddToScreen(ConsolePrinter.MenuMessages["EditAnother"], "yes/no: ");
             var userResponse = Console.ReadLine().ToLower();
             if (userResponse == "yes")
             {
@@ -116,7 +116,7 @@ namespace PhoneBookConsoleUI.Accounts
                     }
                     index++;
                 }
-                ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages, "DeleteAnother", "yes/no: ");
+                ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages["DeleteAnother"], "yes/no: ");
                 if (Console.ReadLine().ToLower() != "yes")
                 {
                     removing = false;
@@ -130,35 +130,35 @@ namespace PhoneBookConsoleUI.Accounts
         {
             var searchResults = new List<Contact>();
 
-            ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages, "SearchType", "Selection: ");
+            ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages["SearchType"], "Selection: ");
             var searchType = Console.ReadKey().KeyChar;
             switch (searchType)
             {
                 case '1':
-                    ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages, "SearchFirst", "First Name: ");
+                    ConsolePrinter.AddToScreen(ConsolePrinter.MenuMessages["SearchFirst"], "First Name: ");
                     var searchVariable = Console.ReadLine().ToLower();
                     searchResults = Contacts.Where(contact => contact.FirstName.ToLower() == searchVariable.ToLower()).ToList();
                     return searchResults;
 
                 case '2':
-                    ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages, "SearchLast", "Last Name: ");
+                    ConsolePrinter.AddToScreen(ConsolePrinter.MenuMessages["SearchLast"], "Last Name: ");
                     searchVariable = Console.ReadLine().ToLower();
                     searchResults = Contacts.Where(contact => contact.LastName.ToLower() == searchVariable.ToLower()).ToList();
                     return searchResults;
 
                 case '3':
-                    ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages, "SearchFull", "Full Name: ");
+                    ConsolePrinter.AddToScreen(ConsolePrinter.MenuMessages["SearchFull"], "Full Name: ");
                     searchVariable = Regex.Replace(Console.ReadLine().ToLower(), "[^a-z]", "");
                     searchResults = Contacts.Where(contact => contact.FullName.ToLower() == searchVariable).ToList();
                     return searchResults;
 
                 case '4':
-                    ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages, "SearchPhone", "Phone Number: ");
+                    ConsolePrinter.AddToScreen(ConsolePrinter.MenuMessages["SearchPhone"], "Phone Number: ");
                     searchVariable = Regex.Replace(Console.ReadLine(), "[^.0-9]", "");
                     searchResults = Contacts.Where(contact => Regex.Replace(contact.PhoneNumber, "[^.0-9]", "") == searchVariable).ToList();
                     return searchResults;
                 default:
-                    ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages, "ReturnForInvalidEntry");
+                    ConsolePrinter.AddToScreen(ConsolePrinter.MenuMessages["ReturnForInvalidEntry"].ToString());
                     Console.ReadKey();
                     SearchContacts();
                     break;
@@ -182,7 +182,7 @@ namespace PhoneBookConsoleUI.Accounts
             }
             else
             {
-                ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages, "NoEntries");
+                ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages["NoEntries"]);
             }
         }
 
@@ -194,7 +194,7 @@ namespace PhoneBookConsoleUI.Accounts
             
             if(searchResults.Count > 1)
             {
-                ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages, "Choose", "Selection: ");
+                ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages["Choose"], "Selection: ");
                 ReturnSearchResults();
                 return searchResults.ElementAt(Convert.ToInt32(Console.ReadKey()) - 1);
             }
