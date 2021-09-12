@@ -1,22 +1,21 @@
 ﻿<Properties StartupConfiguration="{2C9E1AA3-695B-465C-A320-DB9EEB860248}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="PhoneBookConsoleUI/obj/Debug/netcoreapp3.1/PhoneBookConsoleUI.csproj.CoreCompileInputs.cache">
+  <MonoDevelop.Ide.Workbench ActiveDocument="PhoneBookConsoleUI/Contacts/ContactFactory.cs">
     <Files>
-      <File FileName="PhoneBookConsoleUI/Accounts/PersonalAccount.cs" Line="193" Column="2" />
-      <File FileName="PhoneBookConsoleUI/Accounts/AccountFactory.cs" Line="1" Column="1" />
+      <File FileName="PhoneBookConsoleUI/Accounts/Account.cs" Line="213" Column="1" />
+      <File FileName="PhoneBookConsoleUI/ConsolePrinter.cs" Line="93" Column="65" />
       <File FileName="PhoneBookConsoleUI/Contacts/Contact.cs" Line="1" Column="1" />
-      <File FileName="PhoneBookConsoleUI/Contacts/ContactFactory.cs" Line="45" Column="91" />
-      <File FileName="PhoneBookConsoleUI/Program.cs" Line="15" Column="31" />
-      <File FileName="PhoneBookConsoleUI/ConsolePrinter.cs" Line="51" Column="36" />
-      <File FileName=".vs/PhoneBookApp/xs/UserPrefs.xml" Line="3" Column="12" />
-      <File FileName="PhoneBookConsoleUI/obj/Debug/netcoreapp3.1/PhoneBookConsoleUI.csproj.CoreCompileInputs.cache" Line="1" Column="1" />
+      <File FileName="PhoneBookConsoleUI/Contacts/ContactFactory.cs" Line="59" Column="14" />
+      <File FileName="PhoneBookConsoleUI/ApplicationManager.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="PhoneBookApp" expanded="True" selected="True">
+          <Node name="PhoneBookApp" expanded="True">
             <Node name="PhoneBookConsoleUI" expanded="True">
               <Node name="Accounts" expanded="True" />
-              <Node name="Contacts" expanded="True" />
+              <Node name="Contacts" expanded="True">
+                <Node name="ContactFactory.cs" selected="True" />
+              </Node>
             </Node>
           </Node>
         </State>
@@ -26,7 +25,11 @@
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/Joey/repos/PhoneBookApp/PhoneBookConsoleUI/Accounts/Account.cs" relfile="PhoneBookConsoleUI/Accounts/Account.cs" line="144" column="1" />
+      <Breakpoint file="/Users/Joey/repos/PhoneBookApp/PhoneBookConsoleUI/Accounts/Account.cs" relfile="PhoneBookConsoleUI/Accounts/Account.cs" line="140" column="1" />
+      <Breakpoint file="/Users/Joey/repos/PhoneBookApp/PhoneBookConsoleUI/Accounts/Account.cs" relfile="PhoneBookConsoleUI/Accounts/Account.cs" line="143" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.ItemProperties.PhoneBookConsoleUI PreferredExecutionTarget="MonoDevelop.Default" />

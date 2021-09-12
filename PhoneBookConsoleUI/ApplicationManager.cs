@@ -1,16 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using PhoneBookConsoleUI.Accounts;
 using PhoneBookConsoleUI.Contacts;
 
 namespace PhoneBookConsoleUI
 {
-    public static class ApplicationManager
+    public static class ApplicationManager 
     {
         static bool ApplicationRunning { get; set; } = true;
 
+        static Account Account { get; set; }
+
         public static void RunApplication()
         {
+            Account = new Account();
             GreetUser();
             //Primary loop to keep application running.
             while(ApplicationRunning)
@@ -35,10 +39,15 @@ namespace PhoneBookConsoleUI
                     break;
                 case '2':
                     //TODO: Create a new contact
-                    ContactFactory.CreateContact();
-                    Console.ReadKey();
+                    Account.AddContact();
                     break;
                 case '3':
+                    Account.EditContact();
+                    break;
+                case '4':
+                    Account.RemoveContact();
+                    break;
+                case '5':
                     ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages, "EndApplication");
                     Console.ReadKey();
                     Console.Clear();

@@ -28,11 +28,10 @@ namespace PhoneBookConsoleUI.Contacts
 
         internal static string EnterFirstName()
         {
-            ConsolePrinter.AddToScreen("Please enter the first name for your contact.", "First Name: ");
+            ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages, "FirstNamePrompt", "First Name: ");
             //Console.WriteLine($"\nPlease enter the first name for your contact.");
             var userInput = Console.ReadLine();
-            var firstName = $"{char.ToUpper(userInput[0])}{userInput.Substring(1)}";
-            return firstName;
+            return $"{char.ToUpper(userInput[0])}{userInput.Substring(1)}";  
         }
 
         // Prompt the user to enter the last name of the contact they wish to
@@ -40,7 +39,8 @@ namespace PhoneBookConsoleUI.Contacts
         // capitalized.
         internal static string EnterLastName()
         {
-            Console.WriteLine($"\nPlease enter the last name for your contact.");
+            ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages, "LastNamePrompt", "Last Name: ");
+            //Console.WriteLine($"\nPlease enter the last name for your contact.");
             var userInput = Console.ReadLine();
             var lastName = $"{char.ToUpper(userInput[0])}{userInput.Substring(1)}";
             return lastName;
@@ -52,7 +52,8 @@ namespace PhoneBookConsoleUI.Contacts
         // 10 digits long.
         internal static string EnterPhoneNumber()
         {
-            Console.WriteLine($"\nPlease enter the 10 digit phone number for your contact.");
+            ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages, "PhoneNumberPrompt", "Phone Number: ");
+            //Console.WriteLine($"\nPlease enter the 10 digit phone number for your contact.");
             var unformatted = Regex.Replace(Console.ReadLine(), "[^.0-9]", "");
             if(unformatted.Length == 10)
             {
@@ -64,7 +65,9 @@ namespace PhoneBookConsoleUI.Contacts
             }
             else
             {
-                Console.WriteLine($"\nThe number you entered was not 10 digits long.");
+                ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages, "InvalidPhone");
+                //Console.WriteLine($"\nThe number you entered was not 10 digits long.");
+                Console.ReadKey();
                 return EnterPhoneNumber();
             }
         }

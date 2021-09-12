@@ -6,12 +6,12 @@ using PhoneBookConsoleUI.Contacts;
 
 namespace PhoneBookConsoleUI.Accounts
 {
-    //TODO: Integrate the ConsolePrinter for all messaging sent to the user.
     class Account 
     {
 
         // List of contacts that are tied to this specific account
         List<Contact> Contacts { get; set; }
+        
         // Primary Contact (or account holder) for this account.
         Contact PrimaryContact { get; set; }
 
@@ -20,9 +20,14 @@ namespace PhoneBookConsoleUI.Accounts
         /// constuctor for Account will take in a Primary Contact to list as the account owner.
         /// </summary>
         /// <param name="PrimaryContact"></param>
-        public Account(Contact primaryContact) 
+        public Account()
         {
-            PrimaryContact = primaryContact;
+            Contacts = new List<Contact>()
+            {
+                new Contact("Joey", "Stilley", "(250) 308-7114"),
+                new Contact("Daniel", "Aguirre", "(218) 412-4512"),
+                new Contact("Caitlin", "Stilley", "(230) 123-4567")
+            };
         }
 
         // 1. Adds a new contact to the account holder's list of contacts
@@ -31,38 +36,15 @@ namespace PhoneBookConsoleUI.Accounts
             var adding = true;
             while (adding)
             {
-                ContactFactory.CreateContact();
-                Console.WriteLine("Would you like to add another contact? yes/no");
-                if (Console.ReadLine().ToLower() != "")
+                var contact = ContactFactory.CreateContact();
+                Contacts.Add(contact);
+                ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages, "AddAnother", "yes / no: ");
+                var userResponse = Console.ReadLine().ToLower();
+                if (userResponse != "yes")
                 {
                     adding = false;
                 }
             }
-        }
-
-        // 1. Removes a specific contact from an acount holder's list of contacts
-        public void RemoveContact()
-        {
-            var removing = true;
-            while (removing)
-            {
-                var searchResults = SearchContacts();
-                var deleteIt = ChooseContact(searchResults);
-                foreach (var contact in Contacts)
-                {
-                    if (deleteIt.FullName == contact.FullName && deleteIt.FullName == contact.PhoneNumber)
-                    {
-                        Contacts.Remove(contact);
-                    }
-                }
-                Console.WriteLine("Would you like to delete another contact? yes/no");
-                if(Console.ReadLine().ToLower() != "yes")
-                {
-                    removing = false;
-                }
-
-            }
-            
         }
 
         // 1. Allows the user to search their list of contacts and choose the
@@ -76,44 +58,69 @@ namespace PhoneBookConsoleUI.Accounts
         {
             var searchResults = SearchContacts();
             var editIt = ChooseContact(searchResults);
-            foreach(var contact in Contacts)
-            {
-                if(editIt.FullName == contact.FullName && editIt.FullName == contact.PhoneNumber)
-                {
-                    Contacts.Remove(contact);
-                }
-            }
             var editing = true;
             while (editing)
             {
-                Console.WriteLine("Please choose the number for the field to would like to edit.");
-                Console.WriteLine($"1. First name\n2. Last Name\n3. Phone number");
-                var field = Console.ReadLine();
+                ConsolePrinter.AddToScreen($"First Name: {editIt.FirstName}\n Last Name: {editIt.LastName}\nPhone Number: {editIt.FirstName}");
+                ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages, "Edit", "Selection: ");
+                var field = Console.ReadKey().KeyChar;
                 switch (field)
                 {
-                    case "1":
+                    case '1':
                         editIt.FirstName = ContactFactory.EnterFirstName();
                         break;
 
-                    case "2":
+                    case '2':
                         editIt.FirstName = ContactFactory.EnterLastName();
                         break;
 
-                    case "3":
+                    case '3':
                         editIt.FirstName = ContactFactory.EnterPhoneNumber();
                         break;
+                    default:
+                        ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages, "ReturnForInvalidEntry");
+                        Console.ReadKey();
+                        EditContact();
+                        break;
                 }
-                Console.WriteLine("Would you like to make any more edits to this contact? yes/no");
-                if (Console.ReadLine().ToLower() != "yes")
+                ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages, "StillEditing", "yes/no: ");
+                var userInput = Console.ReadLine().ToLower();
+                if (userInput != "yes")
                 {
                     editing = false;
                 }
             }
-            Contacts.Add(editIt);
-            Console.WriteLine("Would you like to edit a different contact? yes/no");
-            if(Console.ReadLine().ToLower() == "yes")
+
+            ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages, "EditAnother", "yes/no: ");
+            var userResponse = Console.ReadLine().ToLower();
+            if (userResponse == "yes")
             {
                 EditContact();
+            }
+        }
+
+        // 1. Removes a specific contact from an acount holder's list of contacts
+        public void RemoveContact()
+        {
+            var removing = true;
+            while (removing)
+            {
+                var searchResults = SearchContacts();
+                var deleteIt = ChooseContact(searchResults);
+                var index = 0;
+                foreach (var contact in Contacts)
+                {
+                    if (deleteIt.FullName == contact.FullName && deleteIt.PhoneNumber == contact.PhoneNumber)
+                    {
+                        Contacts.RemoveAt(index);
+                    }
+                    index++;
+                }
+                ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages, "DeleteAnother", "yes/no: ");
+                if (Console.ReadLine().ToLower() != "yes")
+                {
+                    removing = false;
+                }
             }
         }
 
@@ -123,33 +130,38 @@ namespace PhoneBookConsoleUI.Accounts
         {
             var searchResults = new List<Contact>();
 
-            Console.WriteLine("Please enter the number for the type of search you would like to make:");
-            Console.WriteLine($"1. By first name\n2. By Last name\n3. By full name\n By phone number");
-            var searchType = Console.ReadLine().ToLower();
+            ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages, "SearchType", "Selection: ");
+            var searchType = Console.ReadKey().KeyChar;
             switch (searchType)
             {
-                case "1":
-                    Console.WriteLine("Please enter the first name of the contact you are searching for.");
+                case '1':
+                    ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages, "SearchFirst", "First Name: ");
                     var searchVariable = Console.ReadLine().ToLower();
                     searchResults = Contacts.Where(contact => contact.FirstName.ToLower() == searchVariable.ToLower()).ToList();
                     return searchResults;
-                case "2":
-                    Console.WriteLine("Please enter the last name of the contact you are searching for.");
+
+                case '2':
+                    ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages, "SearchLast", "Last Name: ");
                     searchVariable = Console.ReadLine().ToLower();
                     searchResults = Contacts.Where(contact => contact.LastName.ToLower() == searchVariable.ToLower()).ToList();
                     return searchResults;
 
-                case "3":
-                    Console.WriteLine("Please enter the first and last name of the contact you are searching for.");
-                    searchVariable = Console.ReadLine().ToLower();
-                    searchResults = Contacts.Where(contact => contact.FullName.ToLower() == searchVariable.ToLower()).ToList();
+                case '3':
+                    ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages, "SearchFull", "Full Name: ");
+                    searchVariable = Regex.Replace(Console.ReadLine().ToLower(), "[^a-z]", "");
+                    searchResults = Contacts.Where(contact => contact.FullName.ToLower() == searchVariable).ToList();
                     return searchResults;
 
-                case "4":
-                    Console.WriteLine("Please enter the phone number of the contact you are searching for.");
+                case '4':
+                    ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages, "SearchPhone", "Phone Number: ");
                     searchVariable = Regex.Replace(Console.ReadLine(), "[^.0-9]", "");
                     searchResults = Contacts.Where(contact => Regex.Replace(contact.PhoneNumber, "[^.0-9]", "") == searchVariable).ToList();
                     return searchResults;
+                default:
+                    ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages, "ReturnForInvalidEntry");
+                    Console.ReadKey();
+                    SearchContacts();
+                    break;
             }
             return searchResults;
         }
@@ -164,13 +176,13 @@ namespace PhoneBookConsoleUI.Accounts
             {
                 foreach (var result in searchResults)
                 {
-                    Console.WriteLine($"{number}. First Name: {result.FirstName}\n  Last Name: {result.LastName}\n  Phone Number: {result.PhoneNumber}\n\n");
+                    ConsolePrinter.AddToScreen($"{number}. First Name: {result.FirstName}\nLast Name: {result.LastName}\n  Phone Number: {result.PhoneNumber}");
                     number++;
                 }
             }
             else
             {
-                Console.WriteLine("There were no entries in your contact list that matched your search.");
+                ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages, "NoEntries");
             }
         }
 
@@ -179,11 +191,12 @@ namespace PhoneBookConsoleUI.Accounts
         // 2. If there is only one contact in the list, returns the lone contact.
         public Contact ChooseContact(List<Contact> searchResults)
         {
-            Console.WriteLine("Please choose the contact you are searching for from the list below.");
+            
             if(searchResults.Count > 1)
             {
+                ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages, "Choose", "Selection: ");
                 ReturnSearchResults();
-                return searchResults.ElementAt(int.Parse(Console.ReadLine()) - 1);
+                return searchResults.ElementAt(Convert.ToInt32(Console.ReadKey()) - 1);
             }
 
             return searchResults.ElementAt(0);
@@ -196,7 +209,7 @@ namespace PhoneBookConsoleUI.Accounts
 
         public void UpdatePrimaryNumber()
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

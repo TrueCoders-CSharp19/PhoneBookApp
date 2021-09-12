@@ -16,12 +16,12 @@ namespace PhoneBookConsoleUI.Accounts
         }
 
         //TODO Expand this to ask what type of account to create, and to either obtain an existing contact or create a new contact to create the account with.
-        internal static Account CreateAccount(Contact primaryContactForNewAccount)
-        {
-            var account = new Account(primaryContactForNewAccount);
-            Accounts.Add(account);
-            return account;
-        }
+        //internal static Account CreateAccount(Contact primaryContactForNewAccount)
+        //{
+        //    var account = new Account(primaryContactForNewAccount);
+        //    Accounts.Add(account);
+        //    return account;
+        //}
 
         /*
 

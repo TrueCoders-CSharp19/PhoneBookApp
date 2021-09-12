@@ -17,9 +17,11 @@ namespace PhoneBookConsoleUI
 
             {"SecondMessage", new string[] {
                 "Please select what you would like to do next: ", "",
-                "1) Show all contacts  ",
-                "2) Add a new contact  ",
-                "3) End the application"} },
+                "1) Show all contacts         ",
+                "2) Add a new contact         ",
+                "3) Edit an existing contact  ",
+                "4) Delete an existing contact",
+                "5) End the application       "} },
 
             {"EndApplication", new string[] {
                 "Thank you for taking the time to use our Phone Book Application.", "",
@@ -43,6 +45,52 @@ namespace PhoneBookConsoleUI
 
             {"PhoneNumberPrompt", new string[] {
                 "Please enter the 10 digit phone number of the contact you would like to add."} },
+
+            {"InvalidPhone", new string[] {
+                "The number you entered was not 10 digits long." } },
+
+            {"AddAnother", new string[]{
+                "Would you like to add another contact?" } },
+
+            {"SearchType", new string[] {
+                "Please enter the number for the type of search you would like to make:",
+                "1. By first name  ",
+                "2. By Last name   ",
+                "3. By full name   ",
+                "4. By phone number" } },
+
+            {"SearchFirst", new string[]{
+                "Please enter the first name of the contact you are searching for." } },
+
+            {"SearchLast", new string[]{
+                "Please enter the last name of the contact you are searching for." } },
+
+            {"SearchFull", new string[]{
+                "Please enter the full name of the contact you are searching for." } },
+
+            {"SearchPhone", new string[]{
+                "Please enter the phone number of the contact you are searching for." } },
+
+            {"Choose", new string[]{
+                "Please choose the contact you are searching for from the list below." } },
+
+            {"NoEntries", new string[]{
+                "There were no entries in your contact list that matched your search." } },
+
+            {"Edit", new string[]{
+                "Please choose the number for the field to would like to edit.",
+                "1. First Name  ",
+                "2. Last Name   ",
+                "3. Phone number" } },
+
+            {"StillEditing", new string[]{
+                "Would you like to make any more edits to this contact?" } },
+
+            {"EditAnother", new string[]{
+                "Would you like to edit a different contact?" } },
+
+            {"DeleteAnother", new string[]{
+                "Would you like to delete another contact?" } },
 
             {"ConfirmPrompt", new string[] {
                 "Please confirm the following Contact Card is correct",
