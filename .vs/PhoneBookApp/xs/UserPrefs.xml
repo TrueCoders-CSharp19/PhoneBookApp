@@ -1,0 +1,31 @@
+﻿<Properties StartupConfiguration="{2C9E1AA3-695B-465C-A320-DB9EEB860248}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="PhoneBookConsoleUI/Contacts/ContactFactory.cs">
+    <Files>
+      <File FileName="PhoneBookConsoleUI/Accounts/PersonalAccount.cs" Line="41" Column="66" />
+      <File FileName="PhoneBookConsoleUI/Accounts/AccountFactory.cs" Line="1" Column="1" />
+      <File FileName="PhoneBookConsoleUI/Contacts/Contact.cs" Line="1" Column="1" />
+      <File FileName="PhoneBookConsoleUI/Contacts/ContactFactory.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="PhoneBookApp" expanded="True">
+            <Node name="PhoneBookConsoleUI" expanded="True">
+              <Node name="Accounts" expanded="True" />
+              <Node name="Contacts" expanded="True">
+                <Node name="ContactFactory.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.PhoneBookConsoleUI PreferredExecutionTarget="MonoDevelop.Default" />
+</Properties>

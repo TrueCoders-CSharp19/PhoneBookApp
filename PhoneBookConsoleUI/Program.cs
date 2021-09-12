@@ -1,4 +1,5 @@
 ﻿using System;
+using PhoneBookConsoleUI.Contacts;
 
 namespace PhoneBookConsoleUI
 {
@@ -6,6 +7,12 @@ namespace PhoneBookConsoleUI
     {
         static void Main(string[] args)
         {
+
+            var screen = new ConsolePrinter();
+            screen.PrintCentered("FirstMessage");
+            Console.ReadKey();
+            screen.PrintCentered("SecondMessage");
+            Console.ReadKey();
 
         }
 
@@ -22,7 +29,7 @@ namespace PhoneBookConsoleUI
             2) Read all the contacts in the phonebook
             3) Update an existing contact
             4) Delete a contact
-         */
+        */
         /* Potential Other Features:      
             
             1) Saving user contacts to a file like JSON
@@ -34,8 +41,9 @@ namespace PhoneBookConsoleUI
 
         
             - I don't know anything about 1, 2, or 4, though I'm definitely
-            open to learning about them. WinForms I've played with before. If we want to
-            tackle any of these after the baseline is completed I'm open to that.
+            open to learning about them. WinForms I've played with before. If we 
+            want to tackle any of these after the baseline is completed I'm open 
+            to that.
          */
         /* Our Additional Features:    
             
@@ -43,10 +51,9 @@ namespace PhoneBookConsoleUI
             on that are not included in the document. 
 
             • Search contacts by Contains() with a list that updates as they enter each char.
-            •
+            • 
         */
         #endregion
-
         #region Project Outline
         /* Structure
          
@@ -56,8 +63,12 @@ namespace PhoneBookConsoleUI
 
             Classes to start with for baseline structure:
 
-            • 
-            • 
+            •  Account 
+
+                
+            • Contact
+
+                
 
         
         */
@@ -88,7 +99,6 @@ namespace PhoneBookConsoleUI
 
         */
         #endregion
-
         #region Feature Status:
 
         /* Instructions:        
@@ -117,10 +127,8 @@ namespace PhoneBookConsoleUI
 
         */
 
-
-
-
         #endregion
+
 
     }
 }
