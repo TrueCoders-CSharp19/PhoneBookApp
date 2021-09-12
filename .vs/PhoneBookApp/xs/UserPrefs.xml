@@ -1,10 +1,12 @@
 ﻿<Properties StartupConfiguration="{2C9E1AA3-695B-465C-A320-DB9EEB860248}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="PhoneBookConsoleUI/Contacts/ContactFactory.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="PhoneBookConsoleUI/ConsolePrinter.cs">
     <Files>
-      <File FileName="PhoneBookConsoleUI/Accounts/PersonalAccount.cs" Line="41" Column="66" />
+      <File FileName="PhoneBookConsoleUI/Accounts/PersonalAccount.cs" Line="20" Column="1" />
       <File FileName="PhoneBookConsoleUI/Accounts/AccountFactory.cs" Line="1" Column="1" />
       <File FileName="PhoneBookConsoleUI/Contacts/Contact.cs" Line="1" Column="1" />
-      <File FileName="PhoneBookConsoleUI/Contacts/ContactFactory.cs" Line="1" Column="1" />
+      <File FileName="PhoneBookConsoleUI/Contacts/ContactFactory.cs" Line="45" Column="91" />
+      <File FileName="PhoneBookConsoleUI/Program.cs" Line="15" Column="31" />
+      <File FileName="PhoneBookConsoleUI/ConsolePrinter.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -12,9 +14,8 @@
           <Node name="PhoneBookApp" expanded="True">
             <Node name="PhoneBookConsoleUI" expanded="True">
               <Node name="Accounts" expanded="True" />
-              <Node name="Contacts" expanded="True">
-                <Node name="ContactFactory.cs" selected="True" />
-              </Node>
+              <Node name="Contacts" expanded="True" />
+              <Node name="ConsolePrinter.cs" selected="True" />
             </Node>
           </Node>
         </State>
