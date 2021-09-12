@@ -62,32 +62,61 @@ namespace PhoneBookConsoleUI
             AddMinimumRowsNeeded();
         }
 
+
         /// <summary>
-        /// Take in a string key and write a message corresponding to that key in the dictionary 
+        /// Take in a Dictionary to search, and a key, then print a message centered vertically corresponding to that key.
         /// </summary>
         /// <param name="key"></param>
-        public static void NewMessage(Dictionary<string, string[]> dictionaryToSearch, string key, bool requestingInput)
+        public static void NewMessage(Dictionary<string, string[]> dictionaryToSearch, string key)
         {
             AddMinimumRowsNeeded();
             var messages = dictionaryToSearch[key].Select(x => PadToCenter(x)).ToArray();
             var startIndex = (Console.WindowHeight / 2) - (messages.Length / 2);
             UpdateRows(startIndex, messages);
-            PrintAll(requestingInput);
+            PrintAll();
         }
 
         /// <summary>
-        /// Add a provided string to the list of StringRows then reprint the page.
+        /// Take in a Dictionary to search, and a key, then print a message followed by the inputRequestMessage centered vertically corresponding to that key. 
+        /// </summary>
+        /// <param name="key"></param>
+        public static void NewMessage(Dictionary<string, string[]> dictionaryToSearch, string key, string inputRequestMessage)
+        {
+            AddMinimumRowsNeeded();
+            var messages = dictionaryToSearch[key].Select(x => PadToCenter(x)).ToArray();
+            var startIndex = (Console.WindowHeight / 2) - (messages.Length / 2);
+            UpdateRows(startIndex, messages);
+            PrintAll(inputRequestMessage);
+        }
+
+        /// <summary>
+        /// Add a provided string to the list of StringRows then reprint the page with the provided requestingInput string before where the user types their response.
         /// </summary>
         /// <param name="newMessage"></param>
         /// <param name="requestingInput"></param>
-        public static void AddMessage(string newMessage, bool requestingInput)
+        public static void AddToScreen(string newMessage, string inputRequestMessage)
         {
+            // add an empty new row to list of StringRows for spacing
+            AddToStringRows("");
+            // add the passed message to the list
+            AddToStringRows(newMessage);
+            // Print the screen again with the input request message before where the user types their input.
+            PrintAll(inputRequestMessage);
             // remove two rows from the beginning of list to make up for the two we are adding (this keeps us centered vertically)
-            StringRows.RemoveRange(0, 2);
-            // put an empty line between the last message printed and the newest message being printed. (double spacing)
-            StringRows.Add(new StringBuilder());
-            StringRows.Add(new StringBuilder(PadToCenter(newMessage))); 
-            PrintAll(requestingInput);
+        }
+
+        /// <summary>
+        /// Add a provided string to the list of StringRows then reprint the page with the provided requestingInput string before where the user types their response.
+        /// </summary>
+        /// <param name="newMessage"></param>
+        /// <param name="requestingInput"></param>
+        public static void AddToScreen(string newMessage)
+        {
+            // add an empty new row to list of StringRows for spacing
+            AddToStringRows("");
+            // add the passed message to the list
+            AddToStringRows(newMessage);
+            PrintAll();
         }
 
         /// <summary>
@@ -95,44 +124,54 @@ namespace PhoneBookConsoleUI
         /// </summary>
         /// <param name="newMessages"></param>
         /// <param name="requestingInput"></param>
-        public static void AddMessage(string[] newMessages, bool requestingInput)
+        public static void AddToScreen(string[] newMessages, string inputRequestMessage)
         {
-            // remove the first rows for however many messages are being added plus one for the extra spacing we add. (this keeps us centered vertically)
-            StringRows.RemoveRange(0, newMessages.Count() + 1);
-            // put an empty line between the last message printed and the newest message being printed. (double spacing)
-            StringRows.Add(new StringBuilder());
+            // add an empty new row to list of StringRows for spacing
+            AddToStringRows("");
             foreach (var message in newMessages)
             {
-                StringRows.Add(new StringBuilder(PadToCenter(message)));
+                // add the passed message to the list
+                AddToStringRows(message);
             }
-            PrintAll(requestingInput);
+            PrintAll(inputRequestMessage);
         }
 
-
-        /// <summary>
-        /// Foreach row in the provided list, call a Console.WriteLine()
-        /// </summary>
-        /// <param name="stringRows"></param>
-        static void PrintAll(bool requestingInput)
+        static void PrintAll(string inputRequesetMessage)
         {
+
             Console.Clear();
             for (int i = 0; i < StringRows.Count; i++)
             {
                 // if it's the last cycle of string rows.
-                if(i == StringRows.Count - 1 && requestingInput)
+                if (i == StringRows.Count - 1)
                 {
                     // print last row and add two new lines for spacing
-                    Console.WriteLine(StringRows[i]+"\n\n");
+                    Console.WriteLine(StringRows[i] + "\n");
                     // then print "Selection: " before where the user types their input
-                    Console.Write("Selection: ".PadLeft(Console.WindowWidth / 2));
+                    Console.Write(inputRequesetMessage.PadLeft(Console.WindowWidth / 2));
                 }
                 else
                 {
                     // otherwise if it's not the last row being printed then just keep printing rows
                     Console.WriteLine(StringRows[i]);
                 }
-                Console.CursorVisible = requestingInput;
+                Console.CursorVisible = true;
             }
+        }
+
+        /// <summary>
+        /// Foreach row in the provided list, call a Console.WriteLine()
+        /// </summary>
+        /// <param name="stringRows"></param>
+        static void PrintAll()
+        {
+
+            Console.Clear();
+            foreach (var message in StringRows)
+            {
+                Console.WriteLine(message);
+            }
+            Console.CursorVisible = false;
         }
 
         /// <summary>
@@ -171,8 +210,6 @@ namespace PhoneBookConsoleUI
             }
         }
 
-
-
         /// <summary>
         /// Return the provided string with padding to the left to center it horiziontally.
         /// </summary>
@@ -187,6 +224,20 @@ namespace PhoneBookConsoleUI
             return textToCenter.PadLeft((int)MathF.Round((Console.WindowWidth / 2) + (textToCenter.Length / 2)));
         }
 
+
+        static void AddToStringRows(string message)
+        {
+            StringRows.RemoveAt(0);
+            StringRows.Add(new StringBuilder(PadToCenter(message)));
+        }
+
+        static void AddToStringRows(string[] message)
+        {
+            foreach (var item in message)
+            {
+                AddToStringRows(item);
+            }
+        }
 
     }
 }

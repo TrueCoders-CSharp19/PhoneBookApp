@@ -28,7 +28,7 @@ namespace PhoneBookConsoleUI.Contacts
 
         internal static string EnterFirstName()
         {
-            ConsolePrinter.AddMessage("Please enter the first name for your contact.", true);
+            ConsolePrinter.AddToScreen("Please enter the first name for your contact.", "First Name: ");
             //Console.WriteLine($"\nPlease enter the first name for your contact.");
             var userInput = Console.ReadLine();
             var firstName = $"{char.ToUpper(userInput[0])}{userInput.Substring(1)}";
