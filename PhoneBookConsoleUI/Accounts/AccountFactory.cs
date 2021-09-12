@@ -8,17 +8,17 @@ namespace PhoneBookConsoleUI.Accounts
     {
 
 
-        static List<PersonalAccount> Accounts { get; set; }
+        static List<Account> Accounts { get; set; }
 
         static AccountFactory()
         {
-            Accounts = new List<PersonalAccount>();
+            Accounts = new List<Account>();
         }
 
         //TODO Expand this to ask what type of account to create, and to either obtain an existing contact or create a new contact to create the account with.
-        internal static PersonalAccount CreateAccount(Contact primaryContactForNewAccount)
+        internal static Account CreateAccount(Contact primaryContactForNewAccount)
         {
-            var account = new PersonalAccount(primaryContactForNewAccount);
+            var account = new Account(primaryContactForNewAccount);
             Accounts.Add(account);
             return account;
         }

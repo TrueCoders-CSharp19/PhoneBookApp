@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace PhoneBookConsoleUI
 {
-    class ConsolePrinter
+    public static class ConsolePrinter
     {
 
         public static Dictionary<string, string[]> MenuMessages = new Dictionary<string, string[]>
@@ -18,7 +18,7 @@ namespace PhoneBookConsoleUI
             {"SecondMessage", new string[] {
                 "Please select what you would like to do next: ", "",
                 "1) Show all contacts  ",
-                "2) Access my account  ",
+                "2) Add a new contact  ",
                 "3) End the application"} },
 
             {"EndApplication", new string[] {
@@ -54,9 +54,9 @@ namespace PhoneBookConsoleUI
         /// <summary>
         /// List of StringBuilders so that I can remove them or add them as needed based on console size.
         /// </summary>
-        List<StringBuilder> StringRows;
+        static List<StringBuilder> StringRows;
 
-        public ConsolePrinter ()
+        static ConsolePrinter ()
         {
             StringRows = new List<StringBuilder>() { new StringBuilder(Console.WindowWidth) };
             AddMinimumRowsNeeded();
@@ -66,7 +66,7 @@ namespace PhoneBookConsoleUI
         /// Take in a string key and write a message corresponding to that key in the dictionary 
         /// </summary>
         /// <param name="key"></param>
-        public void PrintCentered(Dictionary<string, string[]> dictionaryToSearch, string key, bool requestingInput)
+        public static void NewMessage(Dictionary<string, string[]> dictionaryToSearch, string key, bool requestingInput)
         {
             AddMinimumRowsNeeded();
             var messages = dictionaryToSearch[key].Select(x => PadToCenter(x)).ToArray();
@@ -75,13 +75,45 @@ namespace PhoneBookConsoleUI
             PrintAll(requestingInput);
         }
 
+        /// <summary>
+        /// Add a provided string to the list of StringRows then reprint the page.
+        /// </summary>
+        /// <param name="newMessage"></param>
+        /// <param name="requestingInput"></param>
+        public static void AddMessage(string newMessage, bool requestingInput)
+        {
+            // remove two rows from the beginning of list to make up for the two we are adding (this keeps us centered vertically)
+            StringRows.RemoveRange(0, 2);
+            // put an empty line between the last message printed and the newest message being printed. (double spacing)
+            StringRows.Add(new StringBuilder());
+            StringRows.Add(new StringBuilder(PadToCenter(newMessage))); 
+            PrintAll(requestingInput);
+        }
+
+        /// <summary>
+        /// Add an array of strings to the list of StringRows then reprint the page.
+        /// </summary>
+        /// <param name="newMessages"></param>
+        /// <param name="requestingInput"></param>
+        public static void AddMessage(string[] newMessages, bool requestingInput)
+        {
+            // remove the first rows for however many messages are being added plus one for the extra spacing we add. (this keeps us centered vertically)
+            StringRows.RemoveRange(0, newMessages.Count() + 1);
+            // put an empty line between the last message printed and the newest message being printed. (double spacing)
+            StringRows.Add(new StringBuilder());
+            foreach (var message in newMessages)
+            {
+                StringRows.Add(new StringBuilder(PadToCenter(message)));
+            }
+            PrintAll(requestingInput);
+        }
 
 
         /// <summary>
         /// Foreach row in the provided list, call a Console.WriteLine()
         /// </summary>
         /// <param name="stringRows"></param>
-        void PrintAll(bool requestingInput)
+        static void PrintAll(bool requestingInput)
         {
             Console.Clear();
             for (int i = 0; i < StringRows.Count; i++)
@@ -109,7 +141,7 @@ namespace PhoneBookConsoleUI
         /// <param name="rows"></param>
         /// <param name="startIndex"></param>
         /// <param name="messages"></param>
-        void UpdateRows(int startIndex, string[] messages)
+        static void UpdateRows(int startIndex, string[] messages)
         {
             // reset the StringRows list by clearing it then adding the minimum number of rows needed.
             StringRows.Clear();
@@ -131,7 +163,7 @@ namespace PhoneBookConsoleUI
         /// <summary>
         /// Check the current count of rows. If not enough for console, will create more.
         /// </summary>
-        void AddMinimumRowsNeeded()
+        static void AddMinimumRowsNeeded()
         {
             while (StringRows.Count < Console.WindowHeight/2)
             {
@@ -139,12 +171,14 @@ namespace PhoneBookConsoleUI
             }
         }
 
+
+
         /// <summary>
         /// Return the provided string with padding to the left to center it horiziontally.
         /// </summary>
         /// <param name="textToCenter"></param>
         /// <returns></returns>
-        string PadToCenter(string textToCenter)
+        static string PadToCenter(string textToCenter)
         {
             if (textToCenter == null)
             {

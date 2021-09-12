@@ -29,12 +29,21 @@ namespace PhoneBookConsoleUI
         public string PhoneNumber { get; set; }
         //public Account ParentAccount { get; set; }
 
-        public Contact()
+
+        internal Contact(string firstName, string lastName, string phoneNumber)
         {
-            FirstName = ContactFactory.EnterFirstName();
-            LastName = ContactFactory.EnterLastName();
-            PhoneNumber = ContactFactory.EnterPhoneNumber();
+            FirstName = firstName;
+            LastName = lastName;
+            PhoneNumber = phoneNumber;
         }
+
+
+        //public Contact()
+        //{
+        //    FirstName = ContactFactory.EnterFirstName();
+        //    LastName = ContactFactory.EnterLastName();
+        //    PhoneNumber = ContactFactory.EnterPhoneNumber();
+        //}
 
         /// <summary>
         /// Allow the contact to be moved to a new Parent Account. Either create a new account or search for and move to an existing account.

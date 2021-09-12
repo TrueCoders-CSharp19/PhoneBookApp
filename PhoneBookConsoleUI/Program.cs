@@ -7,8 +7,6 @@ namespace PhoneBookConsoleUI
     {
         static void Main(string[] args)
         {
-
-            var screen = new ConsolePrinter();
             ApplicationManager.RunApplication();
 
         }

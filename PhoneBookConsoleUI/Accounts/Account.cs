@@ -7,13 +7,22 @@ using PhoneBookConsoleUI.Contacts;
 namespace PhoneBookConsoleUI.Accounts
 {
     //TODO: Integrate the ConsolePrinter for all messaging sent to the user.
-    class PersonalAccount 
+    class Account 
     {
-        List<Contact> Contacts { get; set; }
 
-        public PersonalAccount(Contact accountContacts) 
+        // List of contacts that are tied to this specific account
+        List<Contact> Contacts { get; set; }
+        // Primary Contact (or account holder) for this account.
+        Contact PrimaryContact { get; set; }
+
+
+        /// <summary>
+        /// constuctor for Account will take in a Primary Contact to list as the account owner.
+        /// </summary>
+        /// <param name="PrimaryContact"></param>
+        public Account(Contact primaryContact) 
         {
-            var consoleStrings = new ConsolePrinter();   
+            PrimaryContact = primaryContact;
         }
 
         // 1. Adds a new contact to the account holder's list of contacts
@@ -22,7 +31,7 @@ namespace PhoneBookConsoleUI.Accounts
             var adding = true;
             while (adding)
             {
-                Contacts.Add(new Contact());
+                ContactFactory.CreateContact();
                 Console.WriteLine("Would you like to add another contact? yes/no");
                 if (Console.ReadLine().ToLower() != "")
                 {
@@ -182,7 +191,7 @@ namespace PhoneBookConsoleUI.Accounts
 
         public void TransferOwnership()
         {
-            throw new NotImplementedException();
+            
         }
 
         public void UpdatePrimaryNumber()

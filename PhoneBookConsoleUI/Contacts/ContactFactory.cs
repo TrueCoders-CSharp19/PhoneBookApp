@@ -17,10 +17,19 @@ namespace PhoneBookConsoleUI.Contacts
         // Prompt the user to enter the last name of the contact they wish to
         // add and return a string of their response with the first character
         // capitalized.
+
+
         
+        public static Contact CreateContact()
+        {
+            return new Contact(EnterFirstName(), EnterLastName(), EnterPhoneNumber());
+        }
+
+
         internal static string EnterFirstName()
         {
-            Console.WriteLine($"\nPlease enter the first name for your contact.");
+            ConsolePrinter.AddMessage("Please enter the first name for your contact.", true);
+            //Console.WriteLine($"\nPlease enter the first name for your contact.");
             var userInput = Console.ReadLine();
             var firstName = $"{char.ToUpper(userInput[0])}{userInput.Substring(1)}";
             return firstName;
