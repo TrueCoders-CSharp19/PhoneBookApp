@@ -24,7 +24,7 @@ namespace PhoneBookConsoleUI.Accounts
             {
                 Contacts.Add(new Contact());
                 Console.WriteLine("Would you like to add another contact? yes/no");
-                if (Console.ReadLine().ToLower() != "yes")
+                if (Console.ReadLine().ToLower() != "")
                 {
                     adding = false;
                 }

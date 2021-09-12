@@ -8,20 +8,22 @@ namespace PhoneBookConsoleUI.Accounts
     {
 
 
-        static List<Account> Accounts { get; set; }
+        static List<PersonalAccount> Accounts { get; set; }
 
         static AccountFactory()
         {
-            Accounts = new List<Account>();
+            Accounts = new List<PersonalAccount>();
         }
 
         //TODO Expand this to ask what type of account to create, and to either obtain an existing contact or create a new contact to create the account with.
-        public static Account CreateAccount(Contact primaryContactForNewAccount)
+        internal static PersonalAccount CreateAccount(Contact primaryContactForNewAccount)
         {
             var account = new PersonalAccount(primaryContactForNewAccount);
             Accounts.Add(account);
             return account;
         }
+
+        /*
 
         /// <summary>
         /// Search the AccountsList until we find an account by the primaryContact provided. Return true/false based on if Accounts contains a match. If a match is found then will out the match, otherwise will out null. 
@@ -29,7 +31,7 @@ namespace PhoneBookConsoleUI.Accounts
         /// <param name="primaryContact"></param>
         /// <param name="accountFound"></param>
         /// <returns></returns>
-        public static bool FindAccount(Contact primaryContact, out Account accountFound)
+        internal static bool FindAccount(Contact primaryContact, out PersonalAccount accountFound)
         {
             foreach (var account in Accounts)
             {
@@ -42,6 +44,6 @@ namespace PhoneBookConsoleUI.Accounts
             accountFound = null;
             return false;
         }
-
+        */
     }
 }

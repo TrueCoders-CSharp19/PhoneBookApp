@@ -17,6 +17,7 @@ namespace PhoneBookConsoleUI.Contacts
         // Prompt the user to enter the last name of the contact they wish to
         // add and return a string of their response with the first character
         // capitalized.
+        
         internal static string EnterFirstName()
         {
             Console.WriteLine($"\nPlease enter the first name for your contact.");

@@ -59,31 +59,47 @@ namespace PhoneBookConsoleUI
         public ConsolePrinter ()
         {
             StringRows = new List<StringBuilder>() { new StringBuilder(Console.WindowWidth) };
-            UpdateStringRowsCount();
+            AddMinimumRowsNeeded();
         }
 
         /// <summary>
         /// Take in a string key and write a message corresponding to that key in the dictionary 
         /// </summary>
         /// <param name="key"></param>
-        public void PrintCentered(string key)
+        public void PrintCentered(Dictionary<string, string[]> dictionaryToSearch, string key, bool requestingInput)
         {
-            CheckRowCount();
-            var messages = MenuMessages[key].Select(x => PadToCenter(x)).ToArray();
+            AddMinimumRowsNeeded();
+            var messages = dictionaryToSearch[key].Select(x => PadToCenter(x)).ToArray();
             var startIndex = (Console.WindowHeight / 2) - (messages.Length / 2);
-            UpdateRows(ref StringRows, startIndex, messages);
-            PrintAll(StringRows);
+            UpdateRows(startIndex, messages);
+            PrintAll(requestingInput);
         }
+
+
 
         /// <summary>
         /// Foreach row in the provided list, call a Console.WriteLine()
         /// </summary>
         /// <param name="stringRows"></param>
-        void PrintAll(List<StringBuilder> stringRows)
+        void PrintAll(bool requestingInput)
         {
-            foreach (var row in StringRows)
+            Console.Clear();
+            for (int i = 0; i < StringRows.Count; i++)
             {
-                Console.WriteLine(row);
+                // if it's the last cycle of string rows.
+                if(i == StringRows.Count - 1 && requestingInput)
+                {
+                    // print last row and add two new lines for spacing
+                    Console.WriteLine(StringRows[i]+"\n\n");
+                    // then print "Selection: " before where the user types their input
+                    Console.Write("Selection: ".PadLeft(Console.WindowWidth / 2));
+                }
+                else
+                {
+                    // otherwise if it's not the last row being printed then just keep printing rows
+                    Console.WriteLine(StringRows[i]);
+                }
+                Console.CursorVisible = requestingInput;
             }
         }
 
@@ -93,45 +109,34 @@ namespace PhoneBookConsoleUI
         /// <param name="rows"></param>
         /// <param name="startIndex"></param>
         /// <param name="messages"></param>
-        void UpdateRows(ref List<StringBuilder> rows, int startIndex, string[] messages)
+        void UpdateRows(int startIndex, string[] messages)
         {
-            ClearAllStrings();
+            // reset the StringRows list by clearing it then adding the minimum number of rows needed.
+            StringRows.Clear();
+            AddMinimumRowsNeeded();
+            // start adding more rows with messages for however many messages being passed.
             for (int i = 0; i < messages.Length; i++)
             {
-                StringRows[i + startIndex].Insert(0, messages[i]);
+                try
+                {
+                    StringRows[i + startIndex].Insert(0, messages[i]);
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    StringRows.Add(new StringBuilder(messages[i]));
+                }
             }
         }
 
         /// <summary>
         /// Check the current count of rows. If not enough for console, will create more.
         /// </summary>
-        void CheckRowCount()
+        void AddMinimumRowsNeeded()
         {
-            if(StringRows.Count < Console.WindowHeight)
-            {
-                UpdateStringRowsCount();
-            }
-        }
-
-        /// <summary>
-        /// Clear all rows to ensure no messages are being displayed when printing a new screen.
-        /// </summary>
-        void ClearAllStrings()
-        {
-            StringRows = StringRows.Select(x => x.Clear()).ToList();
-        }
-
-        /// <summary>
-        /// Add more rows of StringBuilders while the count is less than the Console.WindowWidth
-        /// </summary>
-        void UpdateStringRowsCount()
-        {
-           
-            while (StringRows.Count < Console.WindowHeight)
+            while (StringRows.Count < Console.WindowHeight/2)
             {
                 StringRows.Add(new StringBuilder(Console.WindowWidth));
             }
-            
         }
 
         /// <summary>

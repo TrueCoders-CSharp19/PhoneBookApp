@@ -16,7 +16,6 @@ namespace PhoneBookConsoleUI
         Feature Goal: Contact will represent a listing in the phone book and also will represent an
             entity that can access the phone book. They should have access to their own Favorite
             Contacts, Last Ten Searches, and other features such as that.
-
     */
 
     /// <summary>
@@ -28,7 +27,7 @@ namespace PhoneBookConsoleUI
         public string LastName { get; set; }
         public string FullName { get { return $"{FirstName}{LastName}"; } }
         public string PhoneNumber { get; set; }
-        public Account ParentAccount { get; set; }
+        //public Account ParentAccount { get; set; }
 
         public Contact()
         {

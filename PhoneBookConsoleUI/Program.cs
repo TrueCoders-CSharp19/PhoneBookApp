@@ -9,10 +9,7 @@ namespace PhoneBookConsoleUI
         {
 
             var screen = new ConsolePrinter();
-            screen.PrintCentered("FirstMessage");
-            Console.ReadKey();
-            screen.PrintCentered("SecondMessage");
-            Console.ReadKey();
+            ApplicationManager.RunApplication();
 
         }
 
