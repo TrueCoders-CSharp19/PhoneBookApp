@@ -19,15 +19,41 @@ namespace PhoneBookConsoleUI.Accounts
         // Adds a new contact to the account holder's list of contacts
         public void AddContact()
         {
-            Contacts.Add(new Contact());
+            var adding = true;
+            while (adding)
+            {
+                Contacts.Add(new Contact());
+                Console.WriteLine("Would you like to add another contact? yes/no");
+                if (Console.ReadLine().ToLower() != "yes")
+                {
+                    adding = false;
+                }
+            }
         }
 
         // Removes a specific contact from an acount holder's list of contacts
         public void RemoveContact()
         {
-            var searchResults = SearchContacts();
-            var deleteIt = ChooseContact(searchResults);
-            Contacts.Remove(deleteIt);
+            var removing = true;
+            while (removing)
+            {
+                var searchResults = SearchContacts();
+                var deleteIt = ChooseContact(searchResults);
+                foreach (var contact in Contacts)
+                {
+                    if (deleteIt.FullName == contact.FullName && deleteIt.FullName == contact.PhoneNumber)
+                    {
+                        Contacts.Remove(contact);
+                    }
+                }
+                Console.WriteLine("Would you like to delete another contact? yes/no");
+                if(Console.ReadLine().ToLower() != "yes")
+                {
+                    removing = false;
+                }
+
+            }
+            
         }
 
         // 1. Allows the user to search their list of contacts and choose the
@@ -75,6 +101,11 @@ namespace PhoneBookConsoleUI.Accounts
                 }
             }
             Contacts.Add(editIt);
+            Console.WriteLine("Would you like to edit a different contact? yes/no");
+            if(Console.ReadLine().ToLower() == "yes")
+            {
+                EditContact();
+            }
         }
 
         // 1. Allows the account holder to search their list of contacts.
