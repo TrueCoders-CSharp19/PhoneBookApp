@@ -19,7 +19,7 @@ namespace PhoneBookConsoleUI.Contacts
         // capitalized.
         internal static string EnterFirstName()
         {
-            //ConsolePrinter.MenuMessage
+            Console.WriteLine($"\nPlease enter the first name for your contact.");
             var userInput = Console.ReadLine();
             var firstName = $"{char.ToUpper(userInput[0])}{userInput.Substring(1)}";
             return firstName;
@@ -30,7 +30,7 @@ namespace PhoneBookConsoleUI.Contacts
         // capitalized.
         internal static string EnterLastName()
         {
-            Console.WriteLine($"\nPlease enter the last name of the contact you would like to add.");
+            Console.WriteLine($"\nPlease enter the last name for your contact.");
             var userInput = Console.ReadLine();
             var lastName = $"{char.ToUpper(userInput[0])}{userInput.Substring(1)}";
             return lastName;
@@ -42,7 +42,7 @@ namespace PhoneBookConsoleUI.Contacts
         // 10 digits long.
         internal static string EnterPhoneNumber()
         {
-            Console.WriteLine($"\nPlease enter the 10 digit phone number of the contact you would like to add.");
+            Console.WriteLine($"\nPlease enter the 10 digit phone number for your contact.");
             var unformatted = Regex.Replace(Console.ReadLine(), "[^.0-9]", "");
             if(unformatted.Length == 10)
             {

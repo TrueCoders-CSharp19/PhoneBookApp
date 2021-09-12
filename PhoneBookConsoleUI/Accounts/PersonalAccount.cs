@@ -6,6 +6,7 @@ using PhoneBookConsoleUI.Contacts;
 
 namespace PhoneBookConsoleUI.Accounts
 {
+    //TODO: Integrate the ConsolePrinter for all messaging sent to the user.
     class PersonalAccount 
     {
         List<Contact> Contacts { get; set; }
@@ -15,12 +16,13 @@ namespace PhoneBookConsoleUI.Accounts
             var consoleStrings = new ConsolePrinter();   
         }
 
-
+        // Adds a new contact to the account holder's list of contacts
         public void AddContact()
         {
             Contacts.Add(new Contact());
         }
 
+        // Removes a specific contact from an acount holder's list of contacts
         public void RemoveContact()
         {
             var searchResults = SearchContacts();
@@ -28,6 +30,13 @@ namespace PhoneBookConsoleUI.Accounts
             Contacts.Remove(deleteIt);
         }
 
+        // 1. Allows the user to search their list of contacts and choose the
+        //    specific contact if there are multiple results.
+        // 2. Sets a local copy of a chosen contact.
+        // 3. Removes the chosen contact from the account holder's list of contacts.
+        // 4. Allows the user to edit the local copy of the chosen contact.
+        // 5. Adds the edited contact back to the account holders list of
+        //    contacts after the user is finished editing.
         public void EditContact()
         {
             var searchResults = SearchContacts();
@@ -68,6 +77,8 @@ namespace PhoneBookConsoleUI.Accounts
             Contacts.Add(editIt);
         }
 
+        // 1. Allows the account holder to search their list of contacts.
+        // 2. Returns a list of contacts matching the search parameter.
         public List<Contact> SearchContacts()
         {
             List<Contact> searchResults = new List<Contact>();
@@ -127,6 +138,9 @@ namespace PhoneBookConsoleUI.Accounts
             return searchResults;
         }
 
+
+        // 1. Prints out a numbered list of the search results
+        // 2. If there are no results, tells the user there were no results
         public void ReturnSearchResults()
         {
             var searchResults = SearchContacts();
@@ -145,6 +159,9 @@ namespace PhoneBookConsoleUI.Accounts
             }
         }
 
+        // 1. Allows the user to pick a specific contact from a list of contacts
+        //    to return.
+        // 2. If there is only one contact in the list, returns the lone contact.
         public Contact ChooseContact(List<Contact> searchResults)
         {
             Console.WriteLine("Please choose the contact you are searching for from the list below.");
