@@ -53,9 +53,9 @@ namespace PhoneBookConsoleUI
 
             {"Edit", new string[]{
                 "Please choose the number for the field to would like to edit.",
-                "1. First Name  ",
-                "2. Last Name   ",
-                "3. Phone number" } },
+                "1) First Name  ",
+                "2) Last Name   ",
+                "3) Phone number" } },
 
             {"DeleteAnother", new string[]{
                 "Would you like to delete another contact?" } },

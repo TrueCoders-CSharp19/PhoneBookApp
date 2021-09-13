@@ -67,7 +67,7 @@ namespace PhoneBookConsoleUI.Accounts
             var editing = true;
             while (editing)
             {
-                ConsolePrinter.AddToScreen(new string[] { $"First Name: {editIt.FirstName}", $"Last Name: {editIt.LastName}", $"Phone Number: {editIt.FirstName}" });
+                ConsolePrinter.NewMessage(new string[] { $"First Name: {editIt.FirstName}", $"Last Name: {editIt.LastName}", $"Phone Number: {editIt.FirstName}" });
                 ConsolePrinter.AddToScreen(ConsolePrinter.MenuMessages["Edit"], "Selection: ");
                 var field = Console.ReadKey().KeyChar;
                 switch (field)
@@ -125,16 +125,20 @@ namespace PhoneBookConsoleUI.Accounts
             while (removing)
             {
                 var searchResults = SearchContacts();
-                var deleteIt = ChooseContact(searchResults);
-                var index = 0;
-                foreach (var contact in Contacts)
-                {
-                    if (deleteIt.FullName == contact.FullName && deleteIt.PhoneNumber == contact.PhoneNumber)
-                    {
-                        Contacts.RemoveAt(index);
-                    }
-                    index++;
-                }
+                // store the contact that is going to be deleted
+                //var deleteIt = ChooseContact(searchResults);
+
+                Contacts.Remove(ChooseContact(searchResults));
+
+                //var index = 0;
+                //foreach (var contact in Contacts)
+                //{
+                //    if (deleteIt.FullName == contact.FullName && deleteIt.PhoneNumber == contact.PhoneNumber)
+                //    {
+                //        Contacts.RemoveAt(index);
+                //    }
+                //    index++;
+                //}
                 ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages["DeleteAnother"], "yes/no: ");
                 if (Console.ReadLine().ToLower() != "yes")
                 {
@@ -151,25 +155,25 @@ namespace PhoneBookConsoleUI.Accounts
 
             switch (ConsolePrinter.NewOptionListMessage(ConsolePrinter.MenuMessages["SearchType"]))
             {
-                case '1':
+                case 1:
                     ConsolePrinter.AddToScreen("Please enter the first name of the contact you are searching for.", "First Name: ");
                     var searchVariable = Console.ReadLine().ToLower();
                     searchResults = Contacts.Where(contact => contact.FirstName.ToLower() == searchVariable.ToLower()).ToList();
                     return searchResults;
 
-                case '2':
+                case 2:
                     ConsolePrinter.AddToScreen("Please enter the last name of the contact you are searching for.", "Last Name: ");
                     searchVariable = Console.ReadLine().ToLower();
                     searchResults = Contacts.Where(contact => contact.LastName.ToLower() == searchVariable.ToLower()).ToList();
                     return searchResults;
 
-                case '3':
+                case 3:
                     ConsolePrinter.AddToScreen("Please enter the full name of the contact you are searching for.", "Full Name: ");
                     searchVariable = Regex.Replace(Console.ReadLine().ToLower(), "[^a-z]", "");
                     searchResults = Contacts.Where(contact => contact.FullName.ToLower() == searchVariable).ToList();
                     return searchResults;
 
-                case '4':
+                case 4:
                     ConsolePrinter.AddToScreen("Please enter the phone number of the contact you are searching for.", "Phone Number: ");
                     searchVariable = Regex.Replace(Console.ReadLine(), "[^.0-9]", "");
                     searchResults = Contacts.Where(contact => Regex.Replace(contact.PhoneNumber, "[^.0-9]", "") == searchVariable).ToList();
