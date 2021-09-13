@@ -38,57 +38,24 @@ namespace PhoneBookConsoleUI
                     "Please try this selection again in a later version.", "",
                     "Press any key to return to the previous screen." } },
 
-            {"FirstNamePrompt", new string[] {
-                "Please enter the first name of the contact you would like to add."} },
-
-            {"LastNamePrompt", new string[] {
-                "Please enter the last name of the contact you would like to add."} },
-
-            {"PhoneNumberPrompt", new string[] {
-                "Please enter the 10 digit phone number of the contact you would like to add."} },
-
-            {"InvalidPhone", new string[] {
-                "The number you entered was not 10 digits long." } },
-
             {"AddAnother", new string[]{
                 "Would you like to add another contact?" } },
 
             {"SearchType", new string[] {
                 "Please enter the number for the type of search you would like to make:",
-                "1. By first name  ",
-                "2. By Last name   ",
-                "3. By full name   ",
-                "4. By phone number" } },
-
-            {"SearchFirst", new string[]{
-                "Please enter the first name of the contact you are searching for." } },
-
-            {"SearchLast", new string[]{
-                "Please enter the last name of the contact you are searching for." } },
-
-            {"SearchFull", new string[]{
-                "Please enter the full name of the contact you are searching for." } },
-
-            {"SearchPhone", new string[]{
-                "Please enter the phone number of the contact you are searching for." } },
+                "1) By first name  ",
+                "2) By Last name   ",
+                "3) By full name   ",
+                "4) By phone number" } },
 
             {"Choose", new string[]{
                 "Please choose the contact you are searching for from the list below." } },
-
-            {"NoEntries", new string[]{
-                "There were no entries in your contact list that matched your search." } },
 
             {"Edit", new string[]{
                 "Please choose the number for the field to would like to edit.",
                 "1. First Name  ",
                 "2. Last Name   ",
                 "3. Phone number" } },
-
-            {"StillEditing", new string[]{
-                "Would you like to make any more edits to this contact?" } },
-
-            {"EditAnother", new string[]{
-                "Would you like to edit a different contact?" } },
 
             {"DeleteAnother", new string[]{
                 "Would you like to delete another contact?" } },
@@ -113,6 +80,18 @@ namespace PhoneBookConsoleUI
 
 
         #region Input Messages
+
+        /// <summary>
+        /// print the provided question at the bottom of the screen and then return true/false based on the users input.
+        /// </summary>
+        /// <param name="question"></param>
+        /// <returns></returns>
+        public static bool StackedYesNoQuestion(string question)
+        {           
+            AddToScreen(question, "Enter Yes/No: ");
+            return new Regex(@"^y").IsMatch(Console.ReadLine().ToLower()) ? true : false;
+        }
+
 
 
         /// <summary>
@@ -155,7 +134,6 @@ namespace PhoneBookConsoleUI
             }
             return input;
         }
-
 
         /// <summary>
         /// Cycle through a message that is displayed below the current screen until the user confirms their input. baseMessage reflects all strings above where the user types. inputRequestMessage reflects the text that appears directly in front of where the user types their response.
@@ -355,6 +333,18 @@ namespace PhoneBookConsoleUI
             PrintAll(inputRequestMessage);
         }
 
+        /// <summary>
+        /// Add an array of strings to the list of StringRows then reprint the page.
+        /// </summary>
+        /// <param name="newMessages"></param>
+        /// <param name="requestingInput"></param>
+        public static void AddToScreen(string[] newMessages)
+        {
+            // add an empty new row to list of StringRows for spacing
+            AddToStringRows("");
+            AddToStringRows(newMessages);
+            PrintAll();
+        }
 
         #endregion
 
@@ -478,7 +468,7 @@ namespace PhoneBookConsoleUI
         /// Remove x many rows from bottom of the screen (most recent messages) based on countToRemove provided. Rows are inserted at the top of the screen to make up for those being removed.
         /// </summary>
         /// <param name="countToRemove"></param>
-        static void RemoveLastRows(int countToRemove)
+        public static void RemoveLastRows(int countToRemove)
         {
             ScreenRows.RemoveRange(ScreenRows.Count - countToRemove, countToRemove);
             ScreenRows.InsertRange(0, new StringBuilder[countToRemove]);

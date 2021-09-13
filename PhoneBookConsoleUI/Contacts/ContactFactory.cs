@@ -22,13 +22,14 @@ namespace PhoneBookConsoleUI.Contacts
         
         public static Contact CreateContact()
         {
+            ConsolePrinter.NewMessage(new string[] { "Lets begin creating your new contact." });
             return new Contact(EnterFirstName(), EnterLastName(), EnterPhoneNumber());
         }
 
 
         internal static string EnterFirstName()
         {
-            return ConsolePrinter.NewStringRequestMessage(ConsolePrinter.MenuMessages["FirstNamePrompt"], "First Name: ");
+            return ConsolePrinter.StackedStringRequestMessage("Please enter the first name of the contact you would like to add.", "First Name: ");
             //Console.WriteLine($"\nPlease enter the first name for your contact.");
             //var userInput = Console.ReadLine();
             //return $"{char.ToUpper(userInput[0])}{userInput.Substring(1)}";  
@@ -39,7 +40,8 @@ namespace PhoneBookConsoleUI.Contacts
         // capitalized.
         internal static string EnterLastName()
         {
-            return ConsolePrinter.StackedStringRequestMessage(ConsolePrinter.MenuMessages["LastNamePrompt"], "Last Name: ");
+            //TODO: fix so this isn't having to use a new string[] {}
+            return ConsolePrinter.StackedStringRequestMessage(new string[] {"Please enter the last name of the contact you would like to add."}, "Last Name: ");
             //Console.WriteLine($"\nPlease enter the last name for your contact.");
             //var userInput = Console.ReadLine();
             //var lastName = $"{char.ToUpper(userInput[0])}{userInput.Substring(1)}";
@@ -52,10 +54,10 @@ namespace PhoneBookConsoleUI.Contacts
         // 10 digits long.
         internal static string EnterPhoneNumber()
         {
-            ConsolePrinter.AddToScreen(ConsolePrinter.MenuMessages["PhoneNumberPrompt"], "Phone Number: ");
+            ConsolePrinter.AddToScreen("Please enter the 10 digit phone number of the contact you would like to add.", "Phone Number: ");
             //Console.WriteLine($"\nPlease enter the 10 digit phone number for your contact.");
             var unformatted = Regex.Replace(Console.ReadLine(), "[^.0-9]", "");
-            if(unformatted.Length == 10)
+            if (unformatted.Length == 10)
             {
                 var area = unformatted.Substring(0, 3);
                 var major = unformatted.Substring(3, 3);
@@ -65,7 +67,7 @@ namespace PhoneBookConsoleUI.Contacts
             }
             else
             {
-                ConsolePrinter.AddToScreen(ConsolePrinter.MenuMessages["InvalidPhone"].ToString());
+                ConsolePrinter.AddToScreen("The number you entered was not 10 digits long.");
                 //Console.WriteLine($"\nThe number you entered was not 10 digits long.");
                 Console.ReadKey();
                 return EnterPhoneNumber();

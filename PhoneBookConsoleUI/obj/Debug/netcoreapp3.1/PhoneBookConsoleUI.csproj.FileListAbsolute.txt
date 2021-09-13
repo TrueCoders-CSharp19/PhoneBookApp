@@ -23,3 +23,4 @@ C:\Users\Second-Desktop\repos\PhoneBookApp\PhoneBookConsoleUI\bin\Debug\netcorea
 C:\Users\Second-Desktop\repos\PhoneBookApp\PhoneBookConsoleUI\bin\Debug\netcoreapp3.1\PhoneBookConsoleUI.dll
 C:\Users\Second-Desktop\repos\PhoneBookApp\PhoneBookConsoleUI\bin\Debug\netcoreapp3.1\PhoneBookConsoleUI.pdb
 C:\Users\Second-Desktop\repos\PhoneBookApp\PhoneBookConsoleUI\obj\Debug\netcoreapp3.1\PhoneBookConsoleUI.genruntimeconfig.cache
+C:\Users\Second-Desktop\repos\PhoneBookApp\PhoneBookConsoleUI\obj\Debug\netcoreapp3.1\PhoneBookConsoleUI.csproj.AssemblyReference.cache

@@ -24,41 +24,39 @@ namespace PhoneBookConsoleUI
         }
 
 
-
+        /// <summary>
+        /// Display Main Menu, Take in input, and then print next screen depending on input received.
+        /// </summary>
         static void MainMenu()
-        {
-
-            ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages["SecondMessage"], "Selection: ");
-            var input = Console.ReadKey().KeyChar;
-            switch (input)
+        {            
+            //ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages["SecondMessage"], "Selection: ");
+            //var input = Console.ReadKey().KeyChar;
+            switch (ConsolePrinter.NewOptionListMessage(ConsolePrinter.MenuMessages["SecondMessage"]))
             {
-                case '1':
-                    //TODO: Show all contacts.
-                    ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages["ContentNotCreated"]);
-                    Console.ReadKey();
+                case 1:
+                    Account.ViewAllContacts();
                     break;
-                case '2':
-                    //TODO: Create a new contact
+                case 2:
                     Account.AddContact();
                     break;
-                case '3':
+                case 3:
                     Account.EditContact();
                     break;
-                case '4':
+                case 4:
                     Account.RemoveContact();
                     break;
-                case '5':
+                case 5:
                     ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages["EndApplication"]);
                     Console.ReadKey();
                     Console.Clear();
                     ApplicationRunning = false;
                     break;
-                // if no match then will display no valid entry and then the loop in RunApplication() will return the user to the main menu screen.
-                default:
-                    ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages["ReturnForInvalidEntry"]);
-                    Console.ReadKey();
-                    Console.Clear();
-                    break;
+                //// if no match then will display no valid entry and then the loop in RunApplication() will return the user to the main menu screen.
+                //default:
+                //    ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages["ReturnForInvalidEntry"]);
+                //    Console.ReadKey();
+                //    Console.Clear();
+                //    break;
             }
 
         }
