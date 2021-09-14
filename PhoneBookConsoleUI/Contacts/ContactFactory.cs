@@ -29,7 +29,9 @@ namespace PhoneBookConsoleUI.Contacts
 
         internal static string EnterFirstName()
         {
-            return ConsolePrinter.StackedStringRequestMessage("Please enter the first name of the contact you would like to add.", "First Name: ");
+            var firstName = ConsolePrinter.StackedStringRequestMessage("Please enter the first name of the contact you would like to add.", "First Name: ");
+            ConsolePrinter.AddToScreen($"First Name: {firstName}");
+            return firstName;
             //Console.WriteLine($"\nPlease enter the first name for your contact.");
             //var userInput = Console.ReadLine();
             //return $"{char.ToUpper(userInput[0])}{userInput.Substring(1)}";  
@@ -67,7 +69,7 @@ namespace PhoneBookConsoleUI.Contacts
             }
             else
             {
-                ConsolePrinter.AddToScreen("The number you entered was not 10 digits long.");
+                ConsolePrinter.AddToScreen(ConsolePrinter.MenuMessages["ReturnForInvalidEntry"]);                
                 //Console.WriteLine($"\nThe number you entered was not 10 digits long.");
                 Console.ReadKey();
                 return EnterPhoneNumber();

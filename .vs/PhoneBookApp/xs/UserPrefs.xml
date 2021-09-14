@@ -1,7 +1,7 @@
 ﻿<Properties StartupConfiguration="{2C9E1AA3-695B-465C-A320-DB9EEB860248}|Default">
   <MonoDevelop.Ide.Workbench ActiveDocument="PhoneBookConsoleUI/Accounts/Account.cs">
     <Files>
-      <File FileName="PhoneBookConsoleUI/Accounts/Account.cs" Line="223" Column="14" />
+      <File FileName="PhoneBookConsoleUI/Accounts/Account.cs" Line="230" Column="14" />
       <File FileName="PhoneBookConsoleUI/ConsolePrinter.cs" />
       <File FileName="PhoneBookConsoleUI/Contacts/Contact.cs" />
       <File FileName="PhoneBookConsoleUI/Contacts/ContactFactory.cs" />
@@ -11,15 +11,7 @@
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="PhoneBookApp" expanded="True">
-            <Node name="PhoneBookConsoleUI" expanded="True">
-              <Node name="Dependencies" expanded="True">
-                <Node name="FrameworkReferences" expanded="True" />
-              </Node>
-              <Node name="Accounts" expanded="True">
-                <Node name="Account.cs" selected="True" />
-              </Node>
-              <Node name="Contacts" expanded="True" />
-            </Node>
+            <Node name="PhoneBookWindowsFormsUI" selected="True" />
           </Node>
         </State>
       </Pad>
