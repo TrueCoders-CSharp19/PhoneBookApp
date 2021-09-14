@@ -218,7 +218,8 @@ namespace PhoneBookConsoleUI.Accounts
             {
                 ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages["Choose"], "Selection: ");
                 ReturnSearchResults();
-                return searchResults.ElementAt(Convert.ToInt32(Console.ReadKey()) - 1);
+
+                return searchResults.ElementAt(int.Parse(Console.ReadKey().ToString()) - 1);
             }
 
             return searchResults.ElementAt(0);

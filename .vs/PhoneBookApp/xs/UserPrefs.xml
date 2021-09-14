@@ -1,21 +1,24 @@
 ﻿<Properties StartupConfiguration="{2C9E1AA3-695B-465C-A320-DB9EEB860248}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="PhoneBookConsoleUI/Contacts/ContactFactory.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="PhoneBookConsoleUI/Accounts/Account.cs">
     <Files>
-      <File FileName="PhoneBookConsoleUI/Accounts/Account.cs" Line="213" Column="1" />
-      <File FileName="PhoneBookConsoleUI/ConsolePrinter.cs" Line="93" Column="65" />
-      <File FileName="PhoneBookConsoleUI/Contacts/Contact.cs" Line="1" Column="1" />
-      <File FileName="PhoneBookConsoleUI/Contacts/ContactFactory.cs" Line="59" Column="14" />
-      <File FileName="PhoneBookConsoleUI/ApplicationManager.cs" Line="1" Column="1" />
+      <File FileName="PhoneBookConsoleUI/Accounts/Account.cs" Line="223" Column="14" />
+      <File FileName="PhoneBookConsoleUI/ConsolePrinter.cs" />
+      <File FileName="PhoneBookConsoleUI/Contacts/Contact.cs" />
+      <File FileName="PhoneBookConsoleUI/Contacts/ContactFactory.cs" />
+      <File FileName="PhoneBookConsoleUI/ApplicationManager.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="PhoneBookApp" expanded="True">
             <Node name="PhoneBookConsoleUI" expanded="True">
-              <Node name="Accounts" expanded="True" />
-              <Node name="Contacts" expanded="True">
-                <Node name="ContactFactory.cs" selected="True" />
+              <Node name="Dependencies" expanded="True">
+                <Node name="FrameworkReferences" expanded="True" />
               </Node>
+              <Node name="Accounts" expanded="True">
+                <Node name="Account.cs" selected="True" />
+              </Node>
+              <Node name="Contacts" expanded="True" />
             </Node>
           </Node>
         </State>
@@ -26,9 +29,7 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/Users/Joey/repos/PhoneBookApp/PhoneBookConsoleUI/Accounts/Account.cs" relfile="PhoneBookConsoleUI/Accounts/Account.cs" line="144" column="1" />
-      <Breakpoint file="/Users/Joey/repos/PhoneBookApp/PhoneBookConsoleUI/Accounts/Account.cs" relfile="PhoneBookConsoleUI/Accounts/Account.cs" line="140" column="1" />
-      <Breakpoint file="/Users/Joey/repos/PhoneBookApp/PhoneBookConsoleUI/Accounts/Account.cs" relfile="PhoneBookConsoleUI/Accounts/Account.cs" line="143" column="1" />
+      <Breakpoint file="/Users/Joey/repos/PhoneBookApp/PhoneBookConsoleUI/ApplicationManager.cs" relfile="PhoneBookConsoleUI/ApplicationManager.cs" line="51" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
