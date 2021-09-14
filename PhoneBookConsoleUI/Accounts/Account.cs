@@ -67,26 +67,21 @@ namespace PhoneBookConsoleUI.Accounts
             var editing = true;
             while (editing)
             {
-                ConsolePrinter.NewMessage(new string[] { $"First Name: {editIt.FirstName}", $"Last Name: {editIt.LastName}", $"Phone Number: {editIt.FirstName}" });
-                ConsolePrinter.AddToScreen(ConsolePrinter.MenuMessages["Edit"], "Selection: ");
-                var field = Console.ReadKey().KeyChar;
-                switch (field)
+                var message = new string[] { $"First Name: {editIt.FirstName}", $"Last Name: {editIt.LastName}", $"Phone Number: {editIt.PhoneNumber}", "" }.Concat(ConsolePrinter.MenuMessages["Edit"]);
+                //ConsolePrinter.AddToScreen(ConsolePrinter.MenuMessages["Edit"], "Selection: ");
+                //var field = Console.ReadKey().KeyChar;
+                switch (ConsolePrinter.NewOptionListMessage(message.ToArray()))
                 {
-                    case '1':
+                    case 1:
                         editIt.FirstName = ContactFactory.EnterFirstName();
                         break;
 
-                    case '2':
+                    case 2:
                         editIt.FirstName = ContactFactory.EnterLastName();
                         break;
 
-                    case '3':
+                    case 3:
                         editIt.FirstName = ContactFactory.EnterPhoneNumber();
-                        break;
-                    default:
-                        ConsolePrinter.AddToScreen(ConsolePrinter.MenuMessages["ReturnForInvalidEntry"]);
-                        Console.ReadKey();
-                        EditContact();
                         break;
                 }
 
@@ -152,12 +147,13 @@ namespace PhoneBookConsoleUI.Accounts
         public List<Contact> SearchContacts()
         {
             var searchResults = new List<Contact>();
+            string searchVariable;
 
             switch (ConsolePrinter.NewOptionListMessage(ConsolePrinter.MenuMessages["SearchType"]))
             {
                 case 1:
                     ConsolePrinter.AddToScreen("Please enter the first name of the contact you are searching for.", "First Name: ");
-                    var searchVariable = Console.ReadLine().ToLower();
+                    searchVariable = Console.ReadLine().ToLower();
                     searchResults = Contacts.Where(contact => contact.FirstName.ToLower() == searchVariable.ToLower()).ToList();
                     return searchResults;
 
@@ -181,10 +177,8 @@ namespace PhoneBookConsoleUI.Accounts
                 default:
                     ConsolePrinter.AddToScreen(ConsolePrinter.MenuMessages["ReturnForInvalidEntry"].ToString());
                     Console.ReadKey();
-                    SearchContacts();
-                    break;
+                    return SearchContacts();
             }
-            return searchResults;
         }
 
         // 1. Prints out a numbered list of the search results
@@ -216,14 +210,20 @@ namespace PhoneBookConsoleUI.Accounts
             
             if(searchResults.Count > 1)
             {
-                ConsolePrinter.NewMessage(ConsolePrinter.MenuMessages["Choose"], "Selection: ");
-                ReturnSearchResults();
-                return searchResults.ElementAt(Convert.ToInt32(Console.ReadKey()) - 1);
+                //TODO: ConsolePrinter.NewOptionListMessage(); to get the contact from a message that shows all contacts passed in by searchResults 
+                List<string> contactInfo = new List<string>() { "Please choose the contact you are searching for from the list below.", "" };
+                for (int i = 0; i < searchResults.Count(); i++)
+                {
+                    contactInfo.Add($"{i+1}) First Name: {searchResults[i].FirstName}");
+                    contactInfo.Add($"Last Name: {searchResults[i].LastName}");
+                    contactInfo.Add($"Phone Number: {searchResults[i].PhoneNumber}");
+                    contactInfo.Add(" ");                   
+                }
+                return searchResults.ElementAt(ConsolePrinter.NewOptionListMessage(contactInfo.ToArray())-1);
             }
-
             return searchResults.ElementAt(0);
         }
-
+       
         public void ViewAllContacts()
         {
             //TODO: fix so that this doesn't have to be a string[]
@@ -236,12 +236,11 @@ namespace PhoneBookConsoleUI.Accounts
             Console.ReadKey();
         }
 
-
         public void TransferOwnership()
         {
             
         }
-
+   
         public void UpdatePrimaryNumber()
         {
             

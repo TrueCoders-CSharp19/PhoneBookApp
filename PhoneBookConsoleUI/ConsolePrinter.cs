@@ -42,17 +42,14 @@ namespace PhoneBookConsoleUI
                 "Would you like to add another contact?" } },
 
             {"SearchType", new string[] {
-                "Please enter the number for the type of search you would like to make:",
+                "Please enter the number for the type of search you would like to make:","",
                 "1) By first name  ",
                 "2) By Last name   ",
                 "3) By full name   ",
                 "4) By phone number" } },
 
-            {"Choose", new string[]{
-                "Please choose the contact you are searching for from the list below." } },
-
             {"Edit", new string[]{
-                "Please choose the number for the field to would like to edit.",
+                "Please choose the number for the field to would like to edit.", "",
                 "1) First Name  ",
                 "2) Last Name   ",
                 "3) Phone number" } },
@@ -145,6 +142,7 @@ namespace PhoneBookConsoleUI
         {
             bool inputconfirmed = false;
             bool removeExtraMessage = false;
+            int countToRemove;
             string input = string.Empty;
             while (!inputconfirmed)
             {
@@ -162,7 +160,7 @@ namespace PhoneBookConsoleUI
                     // if it doesn't work properly, then logic for countToRemove should be changed to be dependant
                     // on the baseMessage.Length ..... Pretty sure this will need to be implemented.
                     // change the number of rows to remove based on if we have already looped before, to remove the message printed next.
-                    int countToRemove = removeExtraMessage ? 6 : 4;
+                    countToRemove = (removeExtraMessage ? 4 : 2) + newMessage.Length;
                     RemoveLastRows(countToRemove);
                     AddToScreen("Alright then, lets try this again...");
                     removeExtraMessage = true;
@@ -172,6 +170,8 @@ namespace PhoneBookConsoleUI
                     inputconfirmed = true;
                 }
             }
+            countToRemove = (removeExtraMessage ? 4 : 2) + newMessage.Length;
+            RemoveLastRows(countToRemove);
             return input;
         }
 
@@ -356,7 +356,7 @@ namespace PhoneBookConsoleUI
         /// <param name="inputRequesetMessage"></param>
         static void PrintAll(string inputRequesetMessage)
         {
-
+            AddMinimumRowsNeeded();
             Console.Clear();
             for (int i = 0; i < ScreenRows.Count; i++)
             {
@@ -383,7 +383,7 @@ namespace PhoneBookConsoleUI
         /// <param name="stringRows"></param>
         static void PrintAll()
         {
-
+            AddMinimumRowsNeeded();
             Console.Clear();
             foreach (var message in ScreenRows)
             {
